@@ -13,23 +13,27 @@ namespace Tool1
 
             using (StreamReader sr = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/WRdata.csv"))
             {
-                int LineTeller =  0 ;
+                string[] currentLineChopped;
+                int LineTeller = 0;
                 string currentLine;
                 sr.ReadLine();
                 // currentLine moet null zijn als het einde bereikt
                 while ((currentLine = sr.ReadLine()) != null)
                 {
-                    if (!currentLine.Contains(";-9;-9")) {
-                        ListOngesorteerdData.Add(currentLine);
-                        
-                        for (int i = 0; i < 9; i++)
+                    if (!currentLine.Contains(";-9;-9"))
+                    {
+                        ListOngesorteerdData.Add(currentLine); //kan onnodig zijn
+                        ListGesorteerdData.Add(new List<String>());
+                        currentLineChopped = currentLine.Split(';');
+                        for (int i = 0; i < 8; i++)
                         {
-                            ListGesorteerdData.Add[LineTeller][i];
+
+                            ListGesorteerdData[LineTeller].Add(currentLineChopped[i]);
 
                         }
                         LineTeller++;
                     }
-                    
+
                 }
             }
         }

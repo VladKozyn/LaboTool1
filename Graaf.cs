@@ -10,7 +10,7 @@ namespace Tool1
 
         public static Graaf buildGraaf(int graafID, Dictionary<Knoop, List<Segment>> map)
         {
-
+            
         }
         public List<Knoop> getKnopen()
         {
