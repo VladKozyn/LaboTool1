@@ -9,9 +9,9 @@ namespace Tool1
         public int straatID { get; set; }
         public string straatnaam { get; set; }
 
-        public List<Knoop> getKnopen()
+        public List<Knoop> getKnopen(Graaf graaf)
         {
-
+             return graaf.getKnopen;
         }
         public void showStraat()
         {

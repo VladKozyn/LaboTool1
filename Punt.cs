@@ -16,9 +16,6 @@ namespace Tool1
             this.x = x;
             this.y = y;
         }
-        public string ToString()
-        {
-            //            string Something = string.Join(" ", teruggave);
-        }
+
     }
 }

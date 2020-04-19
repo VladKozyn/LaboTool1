@@ -12,10 +12,7 @@ namespace Tool1
         {
             this.knoopID = knoopID;
             this.punt = punt;
-        }
-        public string ToString()
-        {
-
+            knoopID++;
         }
     }
 }

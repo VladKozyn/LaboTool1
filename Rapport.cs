@@ -7,12 +7,15 @@ namespace Tool1
     {
         static void Main(string[] args)
         {
+            LeesCsvBestand f = new LeesCsvBestand();
+            List<List<String>> x = f.DataMain();
+            /*
             LeesCsvBestand data = new LeesCsvBestand();
             for (int i = 0; i < length; i++)
             {
               
-            }
-
+            }*/
+            int b = 5;
           Console.WriteLine("\n");
         }
     }
