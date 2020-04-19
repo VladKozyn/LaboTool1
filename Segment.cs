@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Tool1
 {
@@ -9,14 +10,7 @@ namespace Tool1
         public int segmentID { get; set; }
         public List<Punt> vertices { get; set; }
 
-        public bool Equals(object X)
-        {
 
-        }
-        public int GetHashCode()
-        {
-
-        }
         public Segment(int segmentID, Knoop beginknoop, Knoop eindknoop, List<Punt> vertices)
         {
             this.segmentID = segmentID;

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 namespace Tool1
 {
-    class LeesCsvBestand
+   public class LeesCsvBestand
     {
+        LeesCsvBestand(){
+            }
         
         public List<List<String>> DataListsOpvullen()
         {

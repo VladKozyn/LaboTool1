@@ -1,4 +1,6 @@
-﻿namespace Tool1
+﻿using System;
+
+namespace Tool1
 {
     class Punt
     {
@@ -8,14 +10,7 @@
         public double y { get; set; }
 
 
-        public bool Equals(object X)
-        {
 
-        }
-        public int GetHashCode()
-        {
-
-        }
         public Punt(double x, double y)
         {
             this.x = x;

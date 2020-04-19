@@ -1,4 +1,7 @@
-﻿namespace Tool1
+﻿using System;
+
+
+namespace Tool1
 {
     class Rapport
     {
