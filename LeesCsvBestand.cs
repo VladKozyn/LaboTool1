@@ -88,7 +88,8 @@ namespace Tool1
                 // currentLine moet null zijn als het einde bereikt
                 while ((currentLine = sr.ReadLine()) != null)
                 {
-
+               if (currentLine.Contains(";nl;"))
+                    {
                         ListGesorteerdGemeenteNamen.Add(new List<String>());
                         currentLineChopped = currentLine.Split(';');
                         for (int i = 0; i < currentLineChopped.Length; i++)
@@ -98,7 +99,7 @@ namespace Tool1
 
                         }
                         LineTeller++;
-                        
+                        }
                 }
             }
             return ListGesorteerdGemeenteNamen;
@@ -152,20 +153,20 @@ namespace Tool1
                 string[] currentLineChopped;
                 int LineTeller = 0;
                 string currentLine;
-                 sr.ReadLine();
+                sr.ReadLine();
 
                 // currentLine moet null zijn als het einde bereikt
                 while ((currentLine = sr.ReadLine()) != null)
                 {
                   for (int f = 0; f < provincieIdCheck.Length; f++) {
-                    if (currentLine.Contains(";"+f+";"))
+                    if (currentLine.Contains(";"+f+";")&&currentLine.Contains(";nl;"))
                     {
                         ListGesorteerdProvincieInfo.Add(new List<String>());
                         currentLineChopped = currentLine.Split(';');
                         for (int i = 0; i < currentLineChopped.Length; i++)
                         {
 
-                            ListGesorteerdProvincieInfo[LineTeller].Add(currentLineChopped[i]);
+                      ListGesorteerdProvincieInfo[LineTeller].Add(currentLineChopped[i]);
 
                         }
                         LineTeller++;
@@ -175,7 +176,11 @@ namespace Tool1
             }
             return ListGesorteerdProvincieInfo;
         }
-
-
+        /*
+         [0] gemeenteId
+         [1] ProvincieID
+         [2] taalCodeProcincieNaam
+         [3] ProvincieNaam
+        */
     }
 }
