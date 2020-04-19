@@ -4,16 +4,14 @@ namespace Tool1
 {
     class Gemeente
     {
-      //  public Graaf graaf { get; set; }
-       // public int straatID { get; set; }
-      //  public string straatnaam { get; set; }
+        int gemeenteNaamId;
+        int gemeenteId;
+        String taalCode;
+        String GemeenteNaam;
+        List<Straat> straten;
 
 
-        public void showGemeente()
-        {
-
-        }
-        public Gemeente(//?????)
+        public Gemeente(int gemeenteNaamId,int gemeenteId, String taalCode,String GemeenteNaam,List<Straat> straten)
         {
             
         }

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace Tool1
 {
@@ -7,8 +7,13 @@ namespace Tool1
     {
         static void Main(string[] args)
         {
+            LeesCsvBestand data = new LeesCsvBestand();
+            for (int i = 0; i < length; i++)
+            {
+              
+            }
 
-
+          Console.WriteLine("\n");
         }
     }
 }

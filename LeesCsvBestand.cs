@@ -5,10 +5,8 @@ namespace Tool1
 {
    public class LeesCsvBestand
     {
-        LeesCsvBestand(){
-            }
         
-        public List<List<String>> DataListsOpvullen()
+        public List<List<String>> DataMain()
         {
             List<List<String>> ListGesorteerdData = new List<List<string>>();
             using (StreamReader sr = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/WRdata.csv"))
