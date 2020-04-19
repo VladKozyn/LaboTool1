@@ -5,13 +5,13 @@ namespace Tool1
 {
     class Segment
     {
-        public int beginknoop { get; set; }
-        public int eindknoop { get; set; }
+        public Knoop beginknoop { get; set; }
+        public Knoop eindknoop { get; set; }
         public int segmentID { get; set; }
         public List<Punt> geoPunten { get; set; }
 
 
-        public Segment(int segmentID, int beginknoop, int eindknoop, List<Punt> geoPunten)
+        public Segment(int segmentID, Knoop beginknoop, Knoop eindknoop, List<Punt> geoPunten)
         {
             this.segmentID = segmentID;
             this.beginknoop = beginknoop;
