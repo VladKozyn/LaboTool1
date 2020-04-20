@@ -11,14 +11,12 @@ namespace Tool1
             LeesCsvBestand leesCsv = new LeesCsvBestand();
             
             List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten());
-                /*wegsegmentID [0];
-      geo [1];
-      morfologie [2];
-      status [3];
-      beginWegknoopID [4];
-      eindWegknoopID [5];
-      linksStraatnaamID [6];
-      rechtsStraatnaamID [7]*/
+            List<Graaf>
+            List<Straat>
+            List<Gemeente>
+            List<Provincie>
+                //todo^
+
 
             }
             //todo graven maken en de list van segmenten verwijderen
