@@ -6,7 +6,7 @@ namespace Tool1
    public class LeesCsvBestand
     {
         
-        public List<List<String>> DataMain()
+        public List<List<String>> WegSegmentenList()
         {
             List<List<String>> ListGesorteerdData = new List<List<string>>();
             using (StreamReader sr = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/WRdata.csv"))
@@ -25,7 +25,7 @@ namespace Tool1
                         for (int i = 0; i < currentLineChopped.Length; i++)
                         {
 
-                            ListGesorteerdData[LineTeller].Add(currentLineChopped[i]);
+                           ListGesorteerdData[LineTeller].Add(currentLineChopped[i]);
 
                         }
                         LineTeller++;

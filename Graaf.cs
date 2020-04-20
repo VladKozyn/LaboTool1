@@ -10,6 +10,10 @@ namespace Tool1
         public Dictionary<Knoop, List<Segment>> map { get; set; }
         public List<Segment> AllelistWegSegmenten { get; set; }
 
+        public void voegAlleLstWegSegmentenToe(Segment segment)
+        {
+            this.AllelistWegSegmenten.Add(segment);
+            }
         public void buildGraaf(int graafID, Dictionary<Knoop, List<Segment>> map)
         {
 

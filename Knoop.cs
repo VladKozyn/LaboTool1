@@ -12,7 +12,7 @@ namespace Tool1
         {
             this.knoopID = knoopID;
             this.punt = punt;
-            knoopID++;
+
         }
     }
 }
