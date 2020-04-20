@@ -8,31 +8,9 @@ namespace Tool1
     {
         static void Main(string[] args)
         {
-            LeesCsvBestand f = new LeesCsvBestand();
-            List<List<String>> wegSegmentenListText = f.WegSegmentenList();
-            List<Segment> listMetWegsegmenten = null;
-            for (int i = 0; i < wegSegmentenListText.Count; i++)
-            {
-                List<Double> doubleListVanPunten = new List<Double>();
-                List<Punt> listVanPuntenMetDoubleValue = new List<Punt>();
-                string puntenPlainText = wegSegmentenListText[i][1];
-                puntenPlainText.Remove(0, 12);
-                puntenPlainText.Trim(',');
-               String[] puntenArrayStrings = puntenPlainText.Split(" ");
-                for (int k = 0; k < puntenArrayStrings.Length; k++)
-                {
-                    doubleListVanPunten.Add(double.Parse(puntenArrayStrings[k], CultureInfo.InvariantCulture));
-                    if(!(k % 2 == 0))
-                    {
-                        listVanPuntenMetDoubleValue.Add(new Punt(doubleListVanPunten[k - 1], doubleListVanPunten[k]));
-                    }
-                }
-
-                int wegsegmentID = int.Parse(wegSegmentenListText[i][0]);
-                Knoop beginKnoop = new Knoop(int.Parse(wegSegmentenListText[i][4]),listVanPuntenMetDoubleValue[0]);
-                Knoop eindKnoop = new Knoop(int.Parse(wegSegmentenListText[i][5]), listVanPuntenMetDoubleValue[listVanPuntenMetDoubleValue.Count-1]);
-
-                listMetWegsegmenten.Add(new Segment(wegsegmentID, beginKnoop, eindKnoop, listVanPuntenMetDoubleValue)); ;
+            LeesCsvBestand leesCsv = new LeesCsvBestand();
+            
+            List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten());
                 /*wegsegmentID [0];
       geo [1];
       morfologie [2];

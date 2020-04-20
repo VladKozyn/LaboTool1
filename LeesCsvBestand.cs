@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 namespace Tool1
 {
    public class LeesCsvBestand
     {
         
-        public List<List<String>> WegSegmentenList()
+        public List<List<String>> leesWegsegmenten()
         {
             List<List<String>> ListGesorteerdData = new List<List<string>>();
             using (StreamReader sr = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/WRdata.csv"))
@@ -34,6 +35,38 @@ namespace Tool1
                 }
             }
             return ListGesorteerdData;
+        }
+
+
+
+
+        public List<Segment> maakListVanSegmenten(List<List<String>> wegSegmentenListText)
+        {
+            List<Segment> listMetWegsegmenten = null;
+            for (int i = 0; i < wegSegmentenListText.Count; i++)
+            {
+                List<Double> doubleListVanPunten = new List<Double>();
+                List<Punt> listVanPuntenMetDoubleValue = new List<Punt>();
+                string puntenPlainText = wegSegmentenListText[i][1];
+                puntenPlainText.Remove(0, 12);
+                puntenPlainText.Trim(',');
+                String[] puntenArrayStrings = puntenPlainText.Split(" ");
+                for (int k = 0; k < puntenArrayStrings.Length; k++)
+                {
+                    doubleListVanPunten.Add(double.Parse(puntenArrayStrings[k], CultureInfo.InvariantCulture));
+                    if (!(k % 2 == 0))
+                    {
+                        listVanPuntenMetDoubleValue.Add(new Punt(doubleListVanPunten[k - 1], doubleListVanPunten[k]));
+                    }
+                }
+
+                int wegsegmentID = int.Parse(wegSegmentenListText[i][0]);
+                Knoop beginKnoop = new Knoop(int.Parse(wegSegmentenListText[i][4]), listVanPuntenMetDoubleValue[0]);
+                Knoop eindKnoop = new Knoop(int.Parse(wegSegmentenListText[i][5]), listVanPuntenMetDoubleValue[listVanPuntenMetDoubleValue.Count - 1]);
+
+                listMetWegsegmenten.Add(new Segment(wegsegmentID, beginKnoop, eindKnoop, listVanPuntenMetDoubleValue));
+            }
+            return listMetWegsegmenten;
         }
         /*wegsegmentID [0];
           geo [1];

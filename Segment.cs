@@ -3,7 +3,7 @@ using System;
 
 namespace Tool1
 {
-    class Segment
+    public class Segment
     {
         public Knoop beginknoop { get; set; }
         public Knoop eindknoop { get; set; }

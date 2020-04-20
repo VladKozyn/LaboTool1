@@ -2,7 +2,7 @@
 
 namespace Tool1
 {
-    class Knoop
+ public   class Knoop
     {
         public int knoopID { get; set; }
         public Punt punt { get; set; }

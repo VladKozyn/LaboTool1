@@ -2,7 +2,7 @@
 
 namespace Tool1
 {
-    class Punt
+   public class Punt
     {
 
 
