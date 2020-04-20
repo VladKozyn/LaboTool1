@@ -8,29 +8,12 @@ namespace Tool1
 
         public int graafID { get; set; }
         public Dictionary<Knoop, List<Segment>> map { get; set; }
-        public List<Segment> AllelistWegSegmenten { get; set; }
-
-        public void voegAlleLstWegSegmentenToe(Segment segment)
-        {
-            this.AllelistWegSegmenten.Add(segment);
-            }
-        public void buildGraaf(int graafID, Dictionary<Knoop, List<Segment>> map)
-        {
+        public List<Segment> segmentenVanGraaf { get; set; }
 
 
 
-            foreach (KeyValuePair<Knoop, List<Segment>> f in map)
-            {
-
-                if (f.Key.knoopID == f.Value[f.Key.knoopID].beginknoop.knoopID || f.Key.knoopID == f.Value[f.Key.knoopID].eindknoop.knoopID)
-                {
-                    listWegSegmenten.Add(f.Value[f.Key.knoopID]);
-
-
-                }
-
-            }
-
+        public void voegSegmentToe(Segment segment){
+            segmentenVanGraaf.Add(segment);
         }
         public List<Knoop> getKnopen()
         {
@@ -61,7 +44,7 @@ namespace Tool1
         public Graaf(int graafID)
         {
             this.graafID = graafID;
-            ++this.graafID;
+           
         }
         public void showGraaf()
         {

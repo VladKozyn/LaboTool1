@@ -63,8 +63,10 @@ namespace Tool1
                 int wegsegmentID = int.Parse(wegSegmentenListText[i][0]);
                 Knoop beginKnoop = new Knoop(int.Parse(wegSegmentenListText[i][4]), listVanPuntenMetDoubleValue[0]);
                 Knoop eindKnoop = new Knoop(int.Parse(wegSegmentenListText[i][5]), listVanPuntenMetDoubleValue[listVanPuntenMetDoubleValue.Count - 1]);
+                int linksStraatnaamID = int.Parse(wegSegmentenListText[i][6]);
+                int rechtsStraatnaamID = int.Parse(wegSegmentenListText[i][7]);
 
-                listMetWegsegmenten.Add(new Segment(wegsegmentID, beginKnoop, eindKnoop, listVanPuntenMetDoubleValue));
+                listMetWegsegmenten.Add(new Segment(wegsegmentID, beginKnoop, eindKnoop, listVanPuntenMetDoubleValue, linksStraatnaamID, rechtsStraatnaamID));
             }
             return listMetWegsegmenten;
         }
