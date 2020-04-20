@@ -33,9 +33,6 @@ namespace Tool1
                 Knoop eindKnoop = new Knoop(int.Parse(wegSegmentenListText[i][5]), listVanPuntenMetDoubleValue[listVanPuntenMetDoubleValue.Count-1]);
 
                 listMetWegsegmenten.Add(new Segment(wegsegmentID, beginKnoop, eindKnoop, listVanPuntenMetDoubleValue)); ;
-
-                        //                if(int.Parse(wegsegmentenList[i][4]) == i|| int.Parse(wegsegmentenList[i][5]) == i)
-                        //als wegsegment gebruikt voor links en rechts voor dezelfde graaf het verwijderen
                 /*wegsegmentID [0];
       geo [1];
       morfologie [2];
