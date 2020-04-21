@@ -237,6 +237,7 @@ namespace Tool1
                         {
                             ListGesorteerdProvincieInfo.Add(new List<String>());
                             currentLineChopped = currentLine.Split(';');
+
                             for (int i = 0; i < currentLineChopped.Length; i++)
                             {
 
@@ -244,9 +245,24 @@ namespace Tool1
 
                             }
                             LineTeller++;
+
+
                         }
                     }
                 }
+            }
+            List<String> checkList = new List<String>();
+            for (int a = 0; a < ListGesorteerdProvincieInfo.Count; a++)
+            {
+                for (int b = 0; b < ListGesorteerdProvincieInfo.Count; b++) {
+                    if (ListGesorteerdProvincieInfo[a][3].Contains(checkList[b]))
+                    {
+                        ListGesorteerdProvincieInfo.RemoveAt(a);
+                    }
+                        
+                            
+                            }
+               
             }
             return ListGesorteerdProvincieInfo;
         }
