@@ -20,6 +20,8 @@ namespace Tool1
             this.provincieId = provincieId;
             this.taal = taal;
             this.naam = naam;
+            List<Gemeente> gemeentes = new List<Gemeente>();
+            this.gemeentes = gemeentes;
         }
         public void voegGemeentetoe(Gemeente gemeente)
         {

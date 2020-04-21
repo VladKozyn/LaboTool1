@@ -42,18 +42,21 @@ namespace Tool1
 
         public List<Segment> maakListVanSegmenten(List<List<String>> wegSegmentenListText)
         {
-            List<Segment> listMetWegsegmenten = null;
+            List<Segment> listMetWegsegmenten = new List<Segment>();
             for (int i = 0; i < wegSegmentenListText.Count; i++)
             {
                 List<Double> doubleListVanPunten = new List<Double>();
                 List<Punt> listVanPuntenMetDoubleValue = new List<Punt>();
-                string puntenPlainText = wegSegmentenListText[i][1];
-                puntenPlainText.Remove(0, 12);
-                puntenPlainText.Trim(',');
+                String puntenPlainText = wegSegmentenListText[i][1];
+                puntenPlainText = puntenPlainText.Remove(0, 12);
+               // puntenPlainText = puntenPlainText.Replace(',','');
+                puntenPlainText = puntenPlainText.Trim('(',')');
+
                 String[] puntenArrayStrings = puntenPlainText.Split(" ");
                 for (int k = 0; k < puntenArrayStrings.Length; k++)
                 {
-                    doubleListVanPunten.Add(double.Parse(puntenArrayStrings[k], CultureInfo.InvariantCulture));
+                  puntenArrayStrings[k] = puntenArrayStrings[k].TrimEnd(',');
+                    doubleListVanPunten.Add(Convert.ToDouble(puntenArrayStrings[k], CultureInfo.InvariantCulture));
                     if (!(k % 2 == 0))
                     {
                         listVanPuntenMetDoubleValue.Add(new Punt(doubleListVanPunten[k - 1], doubleListVanPunten[k]));
@@ -116,7 +119,7 @@ namespace Tool1
 
         public List<Straat> maakListVanStraten(List<List<String>> wegStratenListText)
         {
-            List<Straat> listMetStraten = null;
+            List<Straat> listMetStraten = new List<Straat>();
             for (int i = 0; i < wegStratenListText.Count; i++)
             {
 
@@ -164,7 +167,7 @@ namespace Tool1
 
         public List<Gemeente> maakListVanGemeentes(List<List<String>> gemeentesListText)
         {
-            List<Gemeente> listMetGemeentes = null;
+            List<Gemeente> listMetGemeentes = new List<Gemeente>();
             for (int i = 0; i < gemeentesListText.Count; i++)
             {
 
@@ -269,7 +272,7 @@ namespace Tool1
 
         public List<Provincie> maakListVanProvincies(List<List<String>> provincieListText)
         {
-            List<Provincie> listMetProvincies = null;
+            List<Provincie> listMetProvincies = new List<Provincie>();
             for (int i = 0; i < provincieListText.Count; i++)
             {
 

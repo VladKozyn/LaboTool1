@@ -16,6 +16,8 @@ namespace Tool1
             this.gemeenteId = gemeenteId;
             this.taalCode = taalCode;
             this.GemeenteNaam = GemeenteNaam;
+            List<Straat> straten = new List<Straat>();
+            this.straten = straten;
         }
         public void voegStraatToe(Straat straat)
         {

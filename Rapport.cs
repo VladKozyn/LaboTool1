@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Tool1
 {
@@ -48,7 +49,7 @@ namespace Tool1
                 {
                     if (listVanGemeentesGebruikt[a].gemeenteId == listVanGemeenteIdData[b][1])
                     {
-                        for (int c = 0; b < listVanStraten.Count; c++)
+                        for (int c = 0; c < listVanStraten.Count; c++)
                         {
                             if (listVanGemeenteIdData[a][0] == listVanStraten[c].straatID)
                             {
@@ -56,33 +57,23 @@ namespace Tool1
                                 listVanStratenGebruikt.Add(listVanStraten[c]);
                                 listVanStraten.RemoveAt(c);
                             }
-
+                            
                         }
                     }
                 }
 
                 
             }
+
+            for (int i = 0; i < listVanStratenGebruikt.Count; i++)
+            {
+                listVanGraven.Add(new Graaf(i));
+            }
             //maak lijst van straten koppel ze met gemeente
             for (int i = 0; i < listVanSegmenten.Count; i++)
             {
-
-                if (listVanGraven[listVanSegmenten[i].linksStraatnaamID].GetType() == null && listVanSegmenten[i].linksStraatnaamID !=-9)
-                {
-                    listVanGraven.Insert(listVanSegmenten[i].linksStraatnaamID, (new Graaf(listVanSegmenten[i].linksStraatnaamID)));
-
-                }
-
-                if (listVanGraven[listVanSegmenten[i].rechtsStraatnaamID].GetType() == null && listVanSegmenten[i].rechtsStraatnaamID != -9)
-                {
-                    listVanGraven.Insert(listVanSegmenten[i].rechtsStraatnaamID, (new Graaf(listVanSegmenten[i].rechtsStraatnaamID)));
-
-                }
-
                 if (listVanSegmenten[i].linksStraatnaamID == listVanSegmenten[i].rechtsStraatnaamID && listVanSegmenten[i].linksStraatnaamID != -9)
                 {
-                    
-
                         listVanGraven[listVanSegmenten[i].linksStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
 
                 }
@@ -94,6 +85,8 @@ namespace Tool1
                 {
                     listVanGraven[listVanSegmenten[i].rechtsStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
                 }
+
+                
             }
             //koppel segmenten met graven en vul graven lijst
 
@@ -101,9 +94,8 @@ namespace Tool1
             {
                 listVanStratenGebruikt[i].graaf = listVanGraven[i];
             }
-
             // add graaf in straat
-            
+
 
             Console.WriteLine("\n");
         }

@@ -17,6 +17,7 @@ namespace Tool1
         {
 
         }
+
         public Straat(int straatID, String straatnaam)
         {
             this.straatID = straatID;
