@@ -3,7 +3,7 @@ using System;
 
 namespace Tool1
 {
-    class Graaf
+  public  class Graaf
     {
 
         public int graafID { get; set; }

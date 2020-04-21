@@ -112,6 +112,25 @@ namespace Tool1
 
         //[0] ID
         //[1] Naam
+
+
+        public List<Straat> maakListVanStraten(List<List<String>> wegStratenListText)
+        {
+            List<Straat> listMetStraten = null;
+            for (int i = 0; i < wegStratenListText.Count; i++)
+            {
+
+                int straatId = int.Parse(wegStratenListText[i][0]);
+                string naamStraat = wegStratenListText[i][1];
+
+                listMetStraten.Add(new Straat(straatId, naamStraat,fffff));
+            }
+            return listMetStraten;
+        }
+
+        //[0] ID
+        //[1] Naam
+
         public List<List<String>> GemeentenaamData()
         {
             List<List<String>> ListGesorteerdGemeenteNamen = new List<List<string>>();
@@ -141,15 +160,31 @@ namespace Tool1
             }
             return ListGesorteerdGemeenteNamen;
         }
+
+
+        public List<Gemeente> maakListVanGemeentes(List<List<String>> gemeentesListText)
+        {
+            List<Gemeente> listMetGemeentes = null;
+            for (int i = 0; i < gemeentesListText.Count; i++)
+            {
+
+                int gemeenteid = int.Parse(gemeentesListText[i][1]);
+                string taalCode = gemeentesListText[i][2];
+                string GemeenteNaam = gemeentesListText[i][3];
+
+                listMetGemeentes.Add(new Gemeente(gemeenteid, taalCode,GemeenteNaam,fffffff));
+            }
+            return listMetGemeentes;
+        }
         /*
          [0] gemeentenaamID
          [1] gemeenteID
          [2] taalCodeGemeenteNaam
          [3] gemeenteNaam
         */
-        public List<List<String>> GemeenteIdData()
+        public List<List<int>> GemeenteIdData()
         {
-            List<List<String>> ListGesorteerdGemeenteId = new List<List<string>>();
+            List<List<int>> ListGesorteerdGemeenteId = new List<List<int>>();
             using (StreamReader sr = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/WRGemeenteID.csv"))
             {
                
@@ -161,12 +196,12 @@ namespace Tool1
                 while ((currentLine = sr.ReadLine()) != null)
                 {
 
-                        ListGesorteerdGemeenteId.Add(new List<String>());
+                        ListGesorteerdGemeenteId.Add(new List<int>());
                         currentLineChopped = currentLine.Split(';');
                         for (int i = 0; i < currentLineChopped.Length; i++)
                         {
 
-                            ListGesorteerdGemeenteId[LineTeller].Add(currentLineChopped[i]);
+                            ListGesorteerdGemeenteId[LineTeller].Add(int.Parse(currentLineChopped[i]));
 
                         }
                         LineTeller++;
@@ -219,5 +254,32 @@ namespace Tool1
          [2] taalCodeProcincieNaam
          [3] ProvincieNaam
         */
+
+        public List<Provincie> maakListVanProvincies(List<List<String>> provincieListText)
+        {
+            List<Provincie> listMetProvincies = null;
+            for (int i = 0; i < provincieListText.Count; i++)
+            {
+
+                int gemeenteid = int.Parse(provincieListText[i][0]);
+                int provincieId = int.Parse(provincieListText[i][1]);
+                string taalCode = provincieListText[i][2];
+                string provincieNaam = provincieListText[i][3];
+
+                listMetProvincies.Add(new Provincie(gemeenteid, provincieId, taalCode, provincieNaam,ffffff));
+            }
+            return listMetProvincies;
+        }
+
+
+        /*
+ [0] gemeenteId
+ [1] ProvincieID
+ [2] taalCodeProcincieNaam
+ [3] ProvincieNaam
+*/
+
+
     }
+
 }

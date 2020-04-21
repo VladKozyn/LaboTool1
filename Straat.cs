@@ -3,7 +3,7 @@ using System;
 
 namespace Tool1
 {
-    class Straat
+    public class Straat
     {
         public Graaf graaf { get; set; }
         public int straatID { get; set; }
@@ -17,7 +17,7 @@ namespace Tool1
         {
 
         }
-        public Straat(Graaf graaf, int straatID, string straatnaam)
+        public Straat(int straatID, string straatnaam,Graaf graaf)
         {
             this.graaf = graaf;
             this.straatID = straatID;
