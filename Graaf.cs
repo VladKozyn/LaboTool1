@@ -17,18 +17,13 @@ namespace Tool1
         }
         public List<Knoop> getKnopen()
         {
-
-            List<Knoop> listknopen = null;
-            foreach (KeyValuePair<Knoop, List<Segment>> f in map)
+            List<Knoop> listKnopen = null;
+            for (int i = 0; i < segmentenVanGraaf.Count; i++)
             {
-
-                if (f.Key.knoopID == graafID)
-                {
-                    listknopen.Add(f.Key);
-                }
-
+                listKnopen.Add(segmentenVanGraaf[i].beginknoop);
+                listKnopen.Add(segmentenVanGraaf[i].eindknoop);
             }
-            return listknopen;
+            return listKnopen;
         }
 
         /*wegsegmentID [0];

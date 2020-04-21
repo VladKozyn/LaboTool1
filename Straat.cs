@@ -11,7 +11,7 @@ namespace Tool1
 
         public List<Knoop> getKnopen(Graaf graaf)
         {
-             
+            return graaf.getKnopen();
         }
         public void showStraat()
         {
