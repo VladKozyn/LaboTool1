@@ -9,65 +9,64 @@ namespace Tool1
         static void Main(string[] args)
         {
             LeesCsvBestand leesCsv = new LeesCsvBestand();
-            List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten());
-            List<Segment> listVanSegmentenVoorGraaf = listVanSegmenten;
+
+            List<List<int>> listVanGemeenteIdData = leesCsv.GemeenteIdData();
+            List<Provincie> listVanProvincies = leesCsv.maakListVanProvincies(leesCsv.ProvincieInfoData());
+            List<Gemeente> listVanGemeentes = leesCsv.maakListVanGemeentes(leesCsv.GemeentenaamData());
+            List<Gemeente> listVanGemeentesGebruikt = new List<Gemeente>();
+            List<Straat> listVanStraten = leesCsv.maakListVanStraten(leesCsv.StraatNamenData());
+            List<Straat> listVanStratenGebruikt = new List<Straat>();
             List<Graaf> listVanGrafen = new List<Graaf>();
+            List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten());
 
 
 
-            for (int i = 0; i < listVanSegmenten.Count; i++)
+            for (int a = 0; a < listVanProvincies.Count; a++)
             {
-               /* if (listVanSegmentenVoorGraaf[i].beginknoop.knoopID != listVanSegmentenVoorGraaf[i].eindknoop.knoopID) {
-                    if(listVanGrafen[listVanSegmentenVoorGraaf[i].beginknoop.knoopID] == null)
+                for (int b = 0; b < listVanGemeentes.Count; b++)
+                {
+                    if(listVanProvincies[a].gemeenteId == listVanGemeentes[b].gemeenteId)
                     {
-                        listVanGrafen.Insert(listVanSegmenten[i].beginknoop.knoopID, new Graaf(listVanSegmentenVoorGraaf[i].beginknoop.knoopID));
-                        listVanGrafen[listVanSegmentenVoorGraaf[i].beginknoop.knoopID].voegSegmentToe(listVanSegmentenVoorGraaf[i]);
-
+                        listVanProvincies[a].voegGemeentetoe(listVanGemeentes[b]);
+                        listVanGemeentesGebruikt.Add(listVanGemeentes[b]);
+                        listVanGemeentes.RemoveAt(b);
+                        
                     }
-                    else { listVanGrafen[listVanSegmentenVoorGraaf[i].beginknoop.knoopID].voegSegmentToe(listVanSegmentenVoorGraaf[i]); }
-                    if(listVanGrafen[listVanSegmentenVoorGraaf[i].eindknoop.knoopID] == null)
-                    {
-                        listVanGrafen.Insert(listVanSegmenten[i].eindknoop.knoopID, new Graaf(listVanSegmentenVoorGraaf[i].beginknoop.knoopID));
-                        listVanGrafen[listVanSegmentenVoorGraaf[i].eindknoop.knoopID].voegSegmentToe(listVanSegmentenVoorGraaf[i]);
-                    }else
-                    { listVanGrafen[listVanSegmentenVoorGraaf[i].eindknoop.knoopID].voegSegmentToe(listVanSegmentenVoorGraaf[i]); }
+
                 }
-                else{
-                    if (listVanGrafen[listVanSegmentenVoorGraaf[i].beginknoop.knoopID] == null)
+
+            }
+
+            for (int a = 0; a < listVanGemeentesGebruikt.Count; a++)
+            {
+                for(int b = 0; b < listVanGemeenteIdData.Count; b++)
+                {
+                    if (listVanGemeentesGebruikt[a].gemeenteId == listVanGemeenteIdData[b][1])
                     {
-                        listVanGrafen.Insert(listVanSegmenten[i].beginknoop.knoopID, new Graaf(listVanSegmentenVoorGraaf[i].beginknoop.knoopID));
-                        listVanGrafen[listVanSegmentenVoorGraaf[i].beginknoop.knoopID].voegSegmentToe(listVanSegmentenVoorGraaf[i]);
-                    }
-                    else
-                    {
-                        listVanGrafen[listVanSegmentenVoorGraaf[i].beginknoop.knoopID].voegSegmentToe(listVanSegmentenVoorGraaf[i]);
+                        for (int c = 0; b < listVanStraten.Count; c++)
+                        {
+                            if (listVanGemeenteIdData[a][0] == listVanStraten[c].straatID)
+                            {
+                                listVanGemeentesGebruikt[a].voegStraatToe(listVanStraten[c]);
+                                listVanStratenGebruikt.Add(listVanStraten[c]);
+                                listVanStraten.RemoveAt(c);
+                            }
+
+                        }
                     }
                 }
-                */
-            /*  if(listVanSegmentenVoorGraaf[i].beginknoop.knoopID== i  || listVanSegmentenVoorGraaf[i].eindknoop.knoopID == i )
-              {
-                  l
+                
 
-                  if (listVanSegmentenVoorGraaf[i].beginknoop.knoopID == listVanSegmentenVoorGraaf[i].eindknoop.knoopID){ 
-
-                  }
-              }
-              listVanGrafen.Add(new Graaf(i));
-              */
-
-
-        }
+            }
 
             //doe eerste provincie dan gemeente enz
 
 
-            List<Straat>
-            List<Gemeente>
-            List<Provincie>
-                //todo^
+
+            //todo^
 
 
-            }
+        }
             //todo graven maken en de list van segmenten verwijderen
             Console.WriteLine("\n");
         }

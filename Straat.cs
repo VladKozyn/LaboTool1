@@ -7,7 +7,7 @@ namespace Tool1
     {
         public Graaf graaf { get; set; }
         public int straatID { get; set; }
-        public string straatnaam { get; set; }
+        public String straatnaam { get; set; }
 
         public List<Knoop> getKnopen(Graaf graaf)
         {
@@ -17,9 +17,8 @@ namespace Tool1
         {
 
         }
-        public Straat(int straatID, string straatnaam,Graaf graaf)
+        public Straat(int straatID, String straatnaam)
         {
-            this.graaf = graaf;
             this.straatID = straatID;
             this.straatnaam = straatnaam;
         }
