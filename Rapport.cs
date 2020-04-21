@@ -100,7 +100,7 @@ namespace Tool1
                         for (int d = 0; d < listVanGraven.Count; d++)
                         {
 
-                            if(listVanProvincies[a].gemeentes[b].straten[c].straatID == listVanGraven[d].graafID)
+                            if (listVanProvincies[a].gemeentes[b].straten[c].straatID == listVanGraven[d].graafID)
                             {
                                 listVanProvincies[a].gemeentes[b].straten[c].graaf = listVanGraven[d];
                             }
@@ -109,9 +109,10 @@ namespace Tool1
 
 
 
+                        }
                     }
-                }
 
+                }
             }
             // add graaf in straat
 
