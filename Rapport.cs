@@ -88,23 +88,6 @@ namespace Tool1
 
                 
             }
-            /*
-             List<Book> results = Books.FindAll(FindComputer);
-            if (results.Count != 0)
-            {
-                DisplayResults(results, "All computer:");
-            }
-            else
-            {
-                Console.WriteLine("\nNo books found.");
-            }
-             
-             
-             
-             */
-
-
-
 
             //koppel segmenten met graven en vul graven lijst
 
@@ -114,11 +97,18 @@ namespace Tool1
                 {
                     for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
                     {
-                        foreach (var item in collection)
-                            listVanProvincies[a].gemeentes[b].straten[c].graaf = 
+                        for (int d = 0; d < listVanGraven.Count; d++)
                         {
 
-                        }
+                            if(listVanProvincies[a].gemeentes[b].straten[c].straatID == listVanGraven[d].graafID)
+                            {
+                                listVanProvincies[a].gemeentes[b].straten[c].graaf = listVanGraven[d];
+                            }
+
+
+
+
+
                     }
                 }
 
