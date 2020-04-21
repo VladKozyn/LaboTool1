@@ -16,7 +16,6 @@ namespace Tool1
             List<Provincie> listVanProvincies = leesCsv.maakListVanProvincies(leesCsv.ProvincieInfoData());
 
             List<Gemeente> listVanGemeentes = leesCsv.maakListVanGemeentes(leesCsv.GemeentenaamData());
-            List<Gemeente> listVanGemeentesGebruikt = new List<Gemeente>();
 
             List<Straat> listVanStraten = leesCsv.maakListVanStraten(leesCsv.StraatNamenData());
             List<Straat> listVanStratenGebruikt = new List<Straat>();
@@ -34,7 +33,6 @@ namespace Tool1
                     if(listVanProvincies[a].gemeenteId == listVanGemeentes[b].gemeenteId)
                     {
                         listVanProvincies[a].voegGemeentetoe(listVanGemeentes[b]);
-                        listVanGemeentesGebruikt.Add(listVanGemeentes[b]);
                         listVanGemeentes.RemoveAt(b);
                         
                     }
@@ -43,17 +41,17 @@ namespace Tool1
 
             }
             //maak lijst van gebruikte gemeentes en koppel ze met provincie
-            for (int a = 0; a < listVanGemeentesGebruikt.Count; a++)
+            for (int a = 0; a < listVanProvincies.Count; a++)
             {
-                for(int b = 0; b < listVanGemeenteIdData.Count; b++)
+                for(int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
                 {
-                    if (listVanGemeentesGebruikt[a].gemeenteId == listVanGemeenteIdData[b][1])
+                    if (listVanProvincies[a].gemeentes[b].gemeenteId == listVanGemeenteIdData[b][1])
                     {
                         for (int c = 0; c < listVanStraten.Count; c++)
                         {
-                            if (listVanGemeenteIdData[a][0] == listVanStraten[c].straatID)
+                            if (listVanGemeenteIdData[c][0] == listVanStraten[c].straatID)
                             {
-                                listVanGemeentesGebruikt[a].voegStraatToe(listVanStraten[c]);
+                                listVanProvincies[a].gemeentes[b].voegStraatToe(listVanStraten[c]);
                                 listVanStratenGebruikt.Add(listVanStraten[c]);
                                 listVanStraten.RemoveAt(c);
                             }
@@ -64,12 +62,14 @@ namespace Tool1
 
                 
             }
-
+            //maak lijst van straten koppel ze met gemeente
             for (int i = 0; i < listVanStratenGebruikt.Count; i++)
             {
-                listVanGraven.Add(new Graaf(i));
+                listVanGraven.Add(new Graaf(listVanStratenGebruikt[i].straatID));
             }
-            //maak lijst van straten koppel ze met gemeente
+
+
+            //maak lijst graven
             for (int i = 0; i < listVanSegmenten.Count; i++)
             {
                 if (listVanSegmenten[i].linksStraatnaamID == listVanSegmenten[i].rechtsStraatnaamID && listVanSegmenten[i].linksStraatnaamID != -9)
@@ -88,11 +88,40 @@ namespace Tool1
 
                 
             }
+            /*
+             List<Book> results = Books.FindAll(FindComputer);
+            if (results.Count != 0)
+            {
+                DisplayResults(results, "All computer:");
+            }
+            else
+            {
+                Console.WriteLine("\nNo books found.");
+            }
+             
+             
+             
+             */
+
+
+
+
             //koppel segmenten met graven en vul graven lijst
 
-            for (int i = 0; i < listVanStratenGebruikt.Count; i++)
+            for (int a = 0; a < listVanProvincies.Count; a++)
             {
-                listVanStratenGebruikt[i].graaf = listVanGraven[i];
+                for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                {
+                    for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
+                    {
+                        foreach (var item in collection)
+                            listVanProvincies[a].gemeentes[b].straten[c].graaf = 
+                        {
+
+                        }
+                    }
+                }
+
             }
             // add graaf in straat
 
