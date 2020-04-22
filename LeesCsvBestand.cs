@@ -224,6 +224,7 @@ namespace Tool1
             using (StreamReader sr = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/ProvincieInfo.csv"))
             {
                 List<int> gebruikteProvincie = listVanGebruikteProvincieIds();
+                List<String> woordenOmNietTeGebruiken = new List<String>();
                 String[] currentLineChopped;
                 int LineTeller = 0;
                 String currentLine;
@@ -251,19 +252,6 @@ namespace Tool1
                     }
                 }
             }
-            List<String> checkList = new List<String>();
-            for (int a = 0; a < ListGesorteerdProvincieInfo.Count; a++)
-            {
-                for (int b = 0; b < ListGesorteerdProvincieInfo.Count; b++) {
-                    if (ListGesorteerdProvincieInfo[a][3].Contains(checkList[b]))
-                    {
-                        ListGesorteerdProvincieInfo.RemoveAt(a);
-                    }
-                        
-                            
-                            }
-               
-            }
             return ListGesorteerdProvincieInfo;
         }
         /*
@@ -289,13 +277,35 @@ namespace Tool1
         public List<Provincie> maakListVanProvincies(List<List<String>> provincieListText)
         {
             List<Provincie> listMetProvincies = new List<Provincie>();
-            for (int i = 0; i < provincieListText.Count; i++)
+            List<List<String>> listMetProvinciesTextGebruikt = new List<List<String>>();
+            listMetProvinciesTextGebruikt.Add(provincieListText[0]);
+            for (int a = 1; a < provincieListText.Count; a++)
+            {
+                if (provincieListText[a][3]!=provincieListText[a-1][3])
+                {
+                    listMetProvinciesTextGebruikt.Add(provincieListText[a]);
+                }
+
+
+             /*  for (int b = 0; b < duplicateCheck.Count; b++)
+                {
+                    if (!(provincieListText[a][3].Contains(duplicateCheck[b])))
+                    {
+                        duplicateCheck.Add(provincieListText[a][3]);
+                    }
+                    if (provincieListText[a][3].Contains(duplicateCheck[b])){
+
+                    }
+                }*/
+
+                    }
+            for (int i = 0; i < listMetProvinciesTextGebruikt.Count; i++)
             {
 
-                int gemeenteid = int.Parse(provincieListText[i][0]);
-                int provincieId = int.Parse(provincieListText[i][1]);
-                String taalCode = provincieListText[i][2];
-                String provincieNaam = provincieListText[i][3];
+                int gemeenteid = int.Parse(listMetProvinciesTextGebruikt[i][0]);
+                int provincieId = int.Parse(listMetProvinciesTextGebruikt[i][1]);
+                String taalCode = listMetProvinciesTextGebruikt[i][2];
+                String provincieNaam = listMetProvinciesTextGebruikt[i][3];
 
                 listMetProvincies.Add(new Provincie(gemeenteid, provincieId, taalCode, provincieNaam));
             }

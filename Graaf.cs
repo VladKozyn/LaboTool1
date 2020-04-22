@@ -39,7 +39,8 @@ namespace Tool1
         public Graaf(int graafID)
         {
             this.graafID = graafID;
-           
+            List<Segment> segmentenVanGraaf = new List<Segment>();
+            this.segmentenVanGraaf = segmentenVanGraaf;
         }
         public void showGraaf()
         {

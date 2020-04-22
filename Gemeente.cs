@@ -23,5 +23,20 @@ namespace Tool1
         {
             straten.Add(straat);
         }
+        public int totaalStratenGemeente()
+        {
+            int stratenAantal = 0;
+            for (int i = 0; i < this.straten.Count; i++)
+            {
+                stratenAantal++;
+            }
+            return stratenAantal;
+        }
+        public int totaalLengteStraten(List<Straat> straten)
+        {
+
+        }
+
+
     }
 }

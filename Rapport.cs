@@ -74,17 +74,21 @@ namespace Tool1
             {
                 if (listVanSegmenten[i].linksStraatnaamID == listVanSegmenten[i].rechtsStraatnaamID && listVanSegmenten[i].linksStraatnaamID != -9)
                 {
+                    if (listVanSegmenten[i].linksStraatnaamID < listVanGraven.Count)
+                    {
                         listVanGraven[listVanSegmenten[i].linksStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
-
+                    }
                 }
                 else if(listVanSegmenten[i].linksStraatnaamID != -9)
                 {
-                    listVanGraven[listVanSegmenten[i].linksStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
-                    
-                }else if (listVanSegmenten[i].rechtsStraatnaamID != -9)
-                {
-                    listVanGraven[listVanSegmenten[i].rechtsStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
-                }
+                    if (listVanSegmenten[i].linksStraatnaamID < listVanGraven.Count)
+                    {
+                        listVanGraven[listVanSegmenten[i].linksStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
+                    }
+                }//else if (listVanSegmenten[i].rechtsStraatnaamID != -9)
+              //  {
+              //      listVanGraven[listVanSegmenten[i].rechtsStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
+           //     }
 
                 
             }

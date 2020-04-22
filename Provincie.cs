@@ -10,10 +10,7 @@ namespace Tool1
         public String naam { get; set; }
         public List<Gemeente> gemeentes { get; set; }
 
-        public void showGemeente()
-        {
 
-        }
         public Provincie(int gemeenteId,int provincieId, String taal, String naam)
         {
             this.gemeenteId = gemeenteId;
@@ -27,5 +24,15 @@ namespace Tool1
         {
             gemeentes.Add(gemeente);
         }
+        public int totaalStratenProvincie(List<Gemeente> gemeentes)
+        {
+            int totaalStraten = 0;
+            for (int i = 0; i < this.gemeentes.Count; i++)
+            {
+                totaalStraten =+ this.gemeentes[i].totaalStratenGemeente();
+            }
+            return totaalStraten;
+        }
+
     }
 }
