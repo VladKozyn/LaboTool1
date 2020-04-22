@@ -12,9 +12,7 @@ namespace Tool1
             LeesCsvBestand leesCsv = new LeesCsvBestand();
 
             List<List<int>> listVanGemeenteIdData = leesCsv.GemeenteIdData();
-
-            List<Provincie> listVanProvincies = leesCsv.maakListVanProvincies(leesCsv.ProvincieInfoData());
-
+            List<Provincie> listVanProvincies = leesCsv.maakListVanProvincies(leesCsv.ProvincieInfoData(), leesCsv.listVanGebruikteProvincieIds());
             List<Gemeente> listVanGemeentes = leesCsv.maakListVanGemeentes(leesCsv.GemeentenaamData());
 
             List<Straat> listVanStraten = leesCsv.maakListVanStraten(leesCsv.StraatNamenData());
@@ -23,24 +21,12 @@ namespace Tool1
             List<Graaf> listVanGraven = new List<Graaf>();
 
             List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten());
+            int alleStraten = 0;
+
+           
 
 
-
-            for (int a = 0; a < listVanProvincies.Count; a++)
-            {
-                for (int b = 0; b < listVanGemeentes.Count; b++)
-                {
-                    if(listVanProvincies[a].gemeenteId == listVanGemeentes[b].gemeenteId)
-                    {
-                        listVanProvincies[a].voegGemeentetoe(listVanGemeentes[b]);
-                        listVanGemeentes.RemoveAt(b);
-                        
-                    }
-
-                }
-
-            }
-            //maak lijst van gebruikte gemeentes en koppel ze met provincie
+            //maak lijst van provincie gebruikte gemeentes en koppel ze met provincie
             for (int a = 0; a < listVanProvincies.Count; a++)
             {
                 for(int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
@@ -108,11 +94,6 @@ namespace Tool1
                             {
                                 listVanProvincies[a].gemeentes[b].straten[c].graaf = listVanGraven[d];
                             }
-
-
-
-
-
                         }
                     }
 
@@ -120,11 +101,24 @@ namespace Tool1
             }
             // add graaf in straat
 
+            for (int i = 0; i < listVanProvincies.Count; i++)
+            {
+                
+                alleStraten += listVanProvincies[i].totaalStratenProvincie();
 
-            Console.WriteLine("\n");
+            }
+            Console.WriteLine("{0}\n\nAantal straten per provincie :\n\n", alleStraten);
+            for (int i = 0; i < listVanProvincies.Count; i++)
+            {
+                String provincieNaam ="";
+                int aantalStratenPerProvincie = 0;
+                provincieNaam = listVanProvincies[i].naam;
+                aantalStratenPerProvincie += listVanProvincies[i].totaalStratenProvincie();
+                Console.WriteLine("° {0}:{1}", provincieNaam, aantalStratenPerProvincie);
+            }
         }
             
-            
+           
     }
 }
 

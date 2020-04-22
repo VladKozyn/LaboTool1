@@ -21,13 +21,13 @@ namespace Tool1
             this.linksStraatnaamID = linksStraatnaamID;
             this.rechtsStraatnaamID = rechtsStraatnaamID;
         }
-        public double berekenlengte(List<Punt> geopunten)
+        public double berekenlengte()
         {
             double berekening = 0.0;
 
-            for (int i = 1; i < geopunten.Count; i++)
+            for (int i = 1; i <this.geoPunten.Count; i++)
             {
-                berekening += Math.Sqrt(Math.Pow(geopunten[i].x - geopunten[i - 1].x, 2) + Math.Pow(geopunten[i].y - geopunten[i - 1].y, 2));
+                berekening += Math.Sqrt(Math.Pow(this.geoPunten[i].x - this.geoPunten[i - 1].x, 2) + Math.Pow(this.geoPunten[i].y - this.geoPunten[i - 1].y, 2));
             }
             return berekening;
         }

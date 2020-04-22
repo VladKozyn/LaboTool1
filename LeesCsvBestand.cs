@@ -274,41 +274,37 @@ namespace Tool1
         }
 
 
-        public List<Provincie> maakListVanProvincies(List<List<String>> provincieListText)
+        public List<Provincie> maakListVanProvincies(List<List<String>> provincieListText, List<int> listVanGebruikteProvincieIds)
         {
             List<Provincie> listMetProvincies = new List<Provincie>();
-            List<List<String>> listMetProvinciesTextGebruikt = new List<List<String>>();
-            listMetProvinciesTextGebruikt.Add(provincieListText[0]);
-            for (int a = 1; a < provincieListText.Count; a++)
+            List<List<String>> provincieListTextGebruikte = new List<List<String>>();
+            List<String> namenCheck = new List<String>();
+           
+            for(int a = 0; a < provincieListText.Count; a++)
             {
-                if (provincieListText[a][3]!=provincieListText[a-1][3])
-                {
-                    listMetProvinciesTextGebruikt.Add(provincieListText[a]);
-                }
+                
+            }
 
 
-             /*  for (int b = 0; b < duplicateCheck.Count; b++)
+            for (int a = 0; a< listVanGebruikteProvincieIds.Count; a++){
+                List<int> gebruikteProvincieGemeenteIDS = new List<int>();
+                for (int b = 0; b < provincieListText.Count; b++)
                 {
-                    if (!(provincieListText[a][3].Contains(duplicateCheck[b])))
+                    if(listVanGebruikteProvincieIds[a] == int.Parse(provincieListText[b][1]))
                     {
-                        duplicateCheck.Add(provincieListText[a][3]);
+                        gebruikteProvincieGemeenteIDS.Add(int.Parse(provincieListText[b][0]));
                     }
-                    if (provincieListText[a][3].Contains(duplicateCheck[b])){
-
-                    }
-                }*/
-
-                    }
-            for (int i = 0; i < listMetProvinciesTextGebruikt.Count; i++)
-            {
-
-                int gemeenteid = int.Parse(listMetProvinciesTextGebruikt[i][0]);
-                int provincieId = int.Parse(listMetProvinciesTextGebruikt[i][1]);
-                String taalCode = listMetProvinciesTextGebruikt[i][2];
-                String provincieNaam = listMetProvinciesTextGebruikt[i][3];
+                }
+                List<int> gemeenteid = gebruikteProvincieGemeenteIDS;
+                int provincieId = int.Parse(provincieListTextGebruikte[a][1]);
+                String taalCode = provincieListTextGebruikte[a][2];
+                String provincieNaam = provincieListTextGebruikte[a][3];
 
                 listMetProvincies.Add(new Provincie(gemeenteid, provincieId, taalCode, provincieNaam));
+
             }
+
+
             return listMetProvincies;
         }
 
@@ -319,6 +315,8 @@ namespace Tool1
  [2] taalCodeProcincieNaam
  [3] ProvincieNaam
 */
+
+
 
 
     }

@@ -32,9 +32,14 @@ namespace Tool1
             }
             return stratenAantal;
         }
-        public int totaalLengteStraten(List<Straat> straten)
+        public double totaalLengteStraten()
         {
-
+            double lengte = 0;
+            for (int i = 0; i < this.straten.Count; i++)
+            {
+                lengte += this.straten[i].berekenStraatLengte();
+            }
+            return lengte;
         }
 
 

@@ -23,6 +23,14 @@ namespace Tool1
             this.straatID = straatID;
             this.straatnaam = straatnaam;
         }
-
+        public double berekenStraatLengte()
+        {
+            double lengte= 0;
+            for (int i = 0; i < graaf.segmentenVanGraaf.Count; i++)
+            {
+                lengte += this.graaf.segmentenVanGraaf[i].berekenlengte();
+            }
+            return lengte;
+        }
     }
 }

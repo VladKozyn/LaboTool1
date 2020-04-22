@@ -4,16 +4,16 @@ namespace Tool1
 {
    public class Provincie
     {
-       public int gemeenteId { get; set; }
+       public List<int> gemeenteIds { get; set; }
         public int provincieId { get; set; }
         public String taal { get; set; }
         public String naam { get; set; }
         public List<Gemeente> gemeentes { get; set; }
 
 
-        public Provincie(int gemeenteId,int provincieId, String taal, String naam)
+        public Provincie(List<int> gemeenteIds,int provincieId, String taal, String naam)
         {
-            this.gemeenteId = gemeenteId;
+            this.gemeenteIds = gemeenteIds;
             this.provincieId = provincieId;
             this.taal = taal;
             this.naam = naam;
@@ -24,7 +24,7 @@ namespace Tool1
         {
             gemeentes.Add(gemeente);
         }
-        public int totaalStratenProvincie(List<Gemeente> gemeentes)
+        public int totaalStratenProvincie()
         {
             int totaalStraten = 0;
             for (int i = 0; i < this.gemeentes.Count; i++)
