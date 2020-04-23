@@ -8,6 +8,7 @@ namespace Tool1
         public Graaf graaf { get; set; }
         public int straatID { get; set; }
         public String straatnaam { get; set; }
+        public double straatlengte { get; set; }
 
         public List<Knoop> getKnopen(Graaf graaf)
         {
@@ -22,6 +23,7 @@ namespace Tool1
         {
             this.straatID = straatID;
             this.straatnaam = straatnaam;
+           
         }
         public double berekenStraatLengte()
         {
@@ -33,6 +35,7 @@ namespace Tool1
             {
                 lengte += this.graaf.segmentenVanGraaf[i].berekenlengte();
             }
+            this.straatlengte = lengte;
             return lengte;
         }
     }

@@ -139,8 +139,8 @@ namespace Tool1
                     for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
                     {
                         sw.Write("    °  Gemeentenaam: {0} , totaalaantalstraten: {1} , totaallengtestraten: {2}\n", listVanProvincies[a].gemeentes[b].GemeenteNaam, listVanProvincies[a].gemeentes[b].straten.Count, listVanProvincies[a].gemeentes[b].totaalLengteStraten());
-                        sw.Write("      °  kortste straat: id: {0}, straatNaam: {1}, lengte: {2} \n", listVanProvincies[a].gemeentes[b].kortsteStraat().straatID, listVanProvincies[a].gemeentes[b].kortsteStraat().straatnaam, listVanProvincies[a].gemeentes[b].kortsteStraat().berekenStraatLengte());
-                        sw.Write("      °  langste straat: id: {0}, straatNaam: {1}, lengte: {2} \n", listVanProvincies[a].gemeentes[b].LangsteStraat().straatID, listVanProvincies[a].gemeentes[b].LangsteStraat().straatnaam, listVanProvincies[a].gemeentes[b].LangsteStraat().berekenStraatLengte());
+                        sw.Write("      °  kortste straat: id: {0}, straatNaam: {1}, lengte: {2} \n", listVanProvincies[a].gemeentes[b].kortsteStraat().straatID, listVanProvincies[a].gemeentes[b].kortsteStraat().straatnaam, listVanProvincies[a].gemeentes[b].kortsteStraat().straatlengte);
+                        sw.Write("      °  langste straat: id: {0}, straatNaam: {1}, lengte: {2} \n", listVanProvincies[a].gemeentes[b].LangsteStraat().straatID, listVanProvincies[a].gemeentes[b].LangsteStraat().straatnaam, listVanProvincies[a].gemeentes[b].LangsteStraat().straatlengte);
                     }
                 }
 
