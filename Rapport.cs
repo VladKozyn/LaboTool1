@@ -135,7 +135,7 @@ namespace Tool1
                 }
                 for (int a = 0; a < listVanProvincies.Count; a++)
                 {
-                    Console.WriteLine("\nStraatInfo:  {0}:\n\n", listVanProvincies[a].naam);
+                    sw.WriteLine("\nStraatInfo:  {0}:\n\n", listVanProvincies[a].naam);
                     for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
                     {
                         sw.Write("    °  Gemeentenaam: {0} , totaalaantalstraten: {1} , totaallengtestraten: {2}\n", listVanProvincies[a].gemeentes[b].GemeenteNaam, listVanProvincies[a].gemeentes[b].straten.Count, listVanProvincies[a].gemeentes[b].totaalLengteStraten());
