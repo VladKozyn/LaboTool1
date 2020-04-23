@@ -6,6 +6,10 @@ namespace Tool1
 {
     public class LeesCsvBestand
     {
+        public LeesCsvBestand()
+        {
+        }
+
 
         public List<List<String>> leesWegsegmenten()
         {
