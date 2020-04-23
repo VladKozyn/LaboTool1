@@ -273,36 +273,72 @@ namespace Tool1
             return returnInts;
         }
 
+        public static bool IsNullOrEmpty(params String[] array)
+        {
+            return (array[0] == null);
+        }
+
 
         public List<Provincie> maakListVanProvincies(List<List<String>> provincieListText, List<int> listVanGebruikteProvincieIds)
         {
             List<Provincie> listMetProvincies = new List<Provincie>();
-            List<List<String>> provincieListTextGebruikte = new List<List<String>>();
-            List<String> namenCheck = new List<String>();
-           
-            for(int a = 0; a < provincieListText.Count; a++)
+           ;
+            String[][] provincieArrayTextGebruikte =new String[listVanGebruikteProvincieIds.Count][];
+
+            for (int i = 0; i < provincieArrayTextGebruikte.Length; i++)
             {
-                
+                provincieArrayTextGebruikte[i] =  new String[provincieListText[0].Count];
+                provincieArrayTextGebruikte[i][1] = listVanGebruikteProvincieIds[i].ToString();
             }
 
 
-            for (int a = 0; a< listVanGebruikteProvincieIds.Count; a++){
-                List<int> gebruikteProvincieGemeenteIDS = new List<int>();
-                for (int b = 0; b < provincieListText.Count; b++)
+            for (int a = 0; a< provincieListText.Count; a++){
+                for (int b = 0; b < provincieArrayTextGebruikte.Length; b++)
                 {
-                    if(listVanGebruikteProvincieIds[a] == int.Parse(provincieListText[b][1]))
+                    if(provincieArrayTextGebruikte[b][1] == provincieListText[a][1])
                     {
-                        gebruikteProvincieGemeenteIDS.Add(int.Parse(provincieListText[b][0]));
+                        if ((provincieArrayTextGebruikte[b][0]) ==null)
+                        {
+                            provincieArrayTextGebruikte[b][0] += provincieListText[a][0] + ",";
+                                provincieArrayTextGebruikte[b][2] = provincieListText[a][2];
+                            provincieArrayTextGebruikte[b][3] = provincieListText[a][3];
+                        }
+                        else if (!(provincieArrayTextGebruikte[b][0].Contains(provincieListText[a][0])))
+                        {
+                            provincieArrayTextGebruikte[b][0] += provincieListText[a][0] + ",";
+                        }
+                        
                     }
                 }
-                List<int> gemeenteid = gebruikteProvincieGemeenteIDS;
-                int provincieId = int.Parse(provincieListTextGebruikte[a][1]);
-                String taalCode = provincieListTextGebruikte[a][2];
-                String provincieNaam = provincieListTextGebruikte[a][3];
-
-                listMetProvincies.Add(new Provincie(gemeenteid, provincieId, taalCode, provincieNaam));
+               
 
             }
+            for (int i = 0; i < provincieArrayTextGebruikte.Length; i++)
+            {
+                String[] stringsVoorGemeenteID = provincieArrayTextGebruikte[i][0].Split(',');
+                
+                List<int> gemeenteids = new List<int>();
+
+
+                for (int b = 0; b < stringsVoorGemeenteID.Length; b++)
+                {
+                    if (stringsVoorGemeenteID[b] != "")
+                    {
+                        gemeenteids.Add(int.Parse(stringsVoorGemeenteID[b]));
+                    }
+                }
+
+                int provincieId = int.Parse(provincieArrayTextGebruikte[i][1]);
+                String taalCode = provincieArrayTextGebruikte[i][2];
+                String provincieNaam = provincieArrayTextGebruikte[i][3];
+
+                listMetProvincies.Add(new Provincie(gemeenteids, provincieId, taalCode, provincieNaam));
+            }
+
+
+
+            
+
 
 
             return listMetProvincies;
