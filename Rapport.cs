@@ -14,41 +14,67 @@ namespace Tool1
             List<List<int>> listVanGemeenteIdData = leesCsv.GemeenteIdData();
             List<Provincie> listVanProvincies = leesCsv.maakListVanProvincies(leesCsv.ProvincieInfoData(), leesCsv.listVanGebruikteProvincieIds());
             List<Gemeente> listVanGemeentes = leesCsv.maakListVanGemeentes(leesCsv.GemeentenaamData());
-
+            List<Gemeente> listVanGemeentesGebruikt = listVanGemeentes;
             List<Straat> listVanStraten = leesCsv.maakListVanStraten(leesCsv.StraatNamenData());
             List<Straat> listVanStratenGebruikt = new List<Straat>();
 
             List<Graaf> listVanGraven = new List<Graaf>();
 
             List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten());
+
             int alleStraten = 0;
 
-           
-
-
-            //maak lijst van provincie gebruikte gemeentes en koppel ze met provincie
-            for (int a = 0; a < listVanProvincies.Count; a++)
+            for (int a = 0; a < listVanGemeentes.Count; a++)
             {
-                for(int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                for(int b = 0; b < listVanProvincies.Count; b++)
                 {
-                    if (listVanProvincies[a].gemeentes[b].gemeenteId == listVanGemeenteIdData[b][1])
+                    if (listVanProvincies[b].gemeenteIds.Contains(listVanGemeentes[a].gemeenteId))
                     {
-                        for (int c = 0; c < listVanStraten.Count; c++)
-                        {
-                            if (listVanGemeenteIdData[c][0] == listVanStraten[c].straatID)
-                            {
-                                listVanProvincies[a].gemeentes[b].voegStraatToe(listVanStraten[c]);
-                                listVanStratenGebruikt.Add(listVanStraten[c]);
-                                listVanStraten.RemoveAt(c);
-                            }
-                            
-                        }
+                        listVanProvincies[b].voegGemeentetoe(listVanGemeentes[a]);
+                        listVanGemeentesGebruikt.Add(listVanGemeentes[a]);
                     }
+                }
+            }
+
+
+            //koppel gemeentes met provincie
+
+            for()
+
+
+
+
+            for (int a = 0; a <listVanStraten.Count; a++)
+            //overloop prov
+            {
+                for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                //overloop gemeente in prov
+                {
+                    for (int d = 0; d < listVanGemeenteIdData.Count; d++) {
+                        //overloop alle id dat je kan combineren met straten
+                        if (listVanProvincies[a].gemeentes[b].gemeenteId == listVanGemeenteIdData[d][1])
+                            //check of de gemeente id oveernkom
+                        {
+                            for (int c = 0; c < listVanProvincies.Count; c++)
+                            {
+                                if (listVanGemeenteIdData[d][0] == listVanStraten[c].straatID)
+                                {
+                                    listVanProvincies[a].gemeentes[b].voegStraatToe(listVanStraten[c]);
+                                    listVanStratenGebruikt.Add(listVanStraten[c]);
+                                    listVanStraten.RemoveAt(c);
+                                }
+
+                            }
+                        }
+
+
+
+                }
                 }
 
                 
             }
-            //maak lijst van straten koppel ze met gemeente
+            //maak lijst van gebruikte straten koppel ze met gemeente
             for (int i = 0; i < listVanStratenGebruikt.Count; i++)
             {
                 listVanGraven.Add(new Graaf(listVanStratenGebruikt[i].straatID));
