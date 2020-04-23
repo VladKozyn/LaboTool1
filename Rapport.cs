@@ -13,6 +13,7 @@ namespace Tool1
             List<Provincie> listVanProvincies = leesCsv.maakListVanProvincies(leesCsv.ProvincieInfoData(), leesCsv.listVanGebruikteProvincieIds());
             List<Gemeente> listVanGemeentes = leesCsv.maakListVanGemeentes(leesCsv.GemeentenaamData());
             List<Straat> listVanStraten = leesCsv.maakListVanStraten(leesCsv.StraatNamenData());
+            List<Straat> gebruikteListVanStraten = new List<Straat>();
             List<Graaf> listVanGraven = new List<Graaf>();
             List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten());
             List<List<int>> checklist = leesCsv.GemeenteIdData();
@@ -25,22 +26,22 @@ namespace Tool1
                     if (listVanProvincies[b].gemeenteIds.Contains(listVanGemeentes[a].gemeenteId))
                     {
                         listVanProvincies[b].voegGemeentetoe(listVanGemeentes[a]);
-                        checklist = listVanProvincies[b].gemeentes[a].addStratenIds(checklist);
-                        listVanStraten = listVanProvincies[b].gemeentes[a].AlleStratenCheckenEnToevoegen(listVanStraten);
+                        
                         
 
                     }
                 }
             }
 
-            /*  for (int i = 0; i < listVanProvincies.Count; i++)
+              for (int i = 0; i < listVanProvincies.Count; i++)
               {
                   for (int b = 0; b < listVanProvincies[i].gemeentes.Count; b++)
                   {
-                      listVanProvincies[i].gemeentes[b].alleStratenCheckenEnToevoegen(listVanAlleStraten);
-                  }
+                    checklist = listVanProvincies[i].gemeentes[b].addStratenIds(checklist);
+                    listVanStraten = listVanProvincies[i].gemeentes[b].AlleStratenCheckenEnToevoegen(listVanStraten);
+                }
               }
-              */
+              
 
             for (int i = 0; i < listVanProvincies.Count; i++)
             {
@@ -48,13 +49,15 @@ namespace Tool1
                 {
                     for (int c = 0; c < listVanProvincies[i].gemeentes[b].straten.Count; c++)
                     {
-                        listVanStraten.Add(listVanProvincies[i].gemeentes[b].straten[c]);
+                        gebruikteListVanStraten.Add(listVanProvincies[i].gemeentes[b].straten[c]);
                     }
 
                     
                 }
             }
-            for (int i = 0; i < listVanStraten.Count; i++)
+
+
+            for (int i = 0; i < gebruikteListVanStraten.Count; i++)
             {
                 listVanGraven.Add(new Graaf(listVanStraten[i].straatID));
             }
