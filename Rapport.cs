@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 
 namespace Tool1
@@ -21,27 +22,27 @@ namespace Tool1
 
             for (int a = 0; a < listVanGemeentes.Count; a++)
             {
-                for(int b = 0; b < listVanProvincies.Count; b++)
+                for (int b = 0; b < listVanProvincies.Count; b++)
                 {
                     if (listVanProvincies[b].gemeenteIds.Contains(listVanGemeentes[a].gemeenteId))
                     {
                         listVanProvincies[b].voegGemeentetoe(listVanGemeentes[a]);
-                        
-                        
+
+
 
                     }
                 }
             }
 
-              for (int i = 0; i < listVanProvincies.Count; i++)
-              {
-                  for (int b = 0; b < listVanProvincies[i].gemeentes.Count; b++)
-                  {
+            for (int i = 0; i < listVanProvincies.Count; i++)
+            {
+                for (int b = 0; b < listVanProvincies[i].gemeentes.Count; b++)
+                {
                     checklist = listVanProvincies[i].gemeentes[b].addStratenIds(checklist);
                     listVanStraten = listVanProvincies[i].gemeentes[b].AlleStratenCheckenEnToevoegen(listVanStraten);
                 }
-              }
-              
+            }
+
 
             for (int i = 0; i < listVanProvincies.Count; i++)
             {
@@ -52,41 +53,45 @@ namespace Tool1
                         gebruikteListVanStraten.Add(listVanProvincies[i].gemeentes[b].straten[c]);
                     }
 
-                    
+
                 }
             }
 
 
             for (int i = 0; i < gebruikteListVanStraten.Count; i++)
             {
-                listVanGraven.Add(new Graaf(listVanStraten[i].straatID));
+                listVanGraven.Add(new Graaf(gebruikteListVanStraten[i].straatID));
             }
 
 
             //maak lijst graven
             for (int i = 0; i < listVanSegmenten.Count; i++)
             {
-                if (listVanSegmenten[i].linksStraatnaamID == listVanSegmenten[i].rechtsStraatnaamID && listVanSegmenten[i].linksStraatnaamID != -9)
+                for (int a = 0; a < listVanGraven.Count; a++)
                 {
-                    if (listVanSegmenten[i].linksStraatnaamID < listVanGraven.Count)
+                    if (listVanSegmenten[i].linksStraatnaamID == listVanGraven[a].graafID)
                     {
-                        listVanGraven[listVanSegmenten[i].linksStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
+                        if (listVanSegmenten[i].linksStraatnaamID == listVanSegmenten[i].rechtsStraatnaamID && listVanSegmenten[i].linksStraatnaamID != -9)
+                        {
+                            listVanGraven[a].voegSegmentToe(listVanSegmenten[i]);
+                        }
+                    }
+                    else if (listVanSegmenten[i].linksStraatnaamID == listVanGraven[a].graafID)
+                    {
+                        if (listVanSegmenten[i].linksStraatnaamID != -9)
+                        {
+                            listVanGraven[a].voegSegmentToe(listVanSegmenten[i]);
+                        }
                     }
                 }
-                else if(listVanSegmenten[i].linksStraatnaamID != -9)
-                {
-                    if (listVanSegmenten[i].linksStraatnaamID < listVanGraven.Count)
-                    {
-                        listVanGraven[listVanSegmenten[i].linksStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
-                    }
-                }
-                
-                //else if (listVanSegmenten[i].rechtsStraatnaamID != -9)
-              //  {
-              //      listVanGraven[listVanSegmenten[i].rechtsStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
-           //     }
 
-                
+
+                //else if (listVanSegmenten[i].rechtsStraatnaamID != -9)
+                //  {
+                //      listVanGraven[listVanSegmenten[i].rechtsStraatnaamID].voegSegmentToe(listVanSegmenten[i]);
+                //     }
+
+
             }
 
             //koppel segmenten met graven en vul graven lijst
@@ -113,22 +118,36 @@ namespace Tool1
 
             for (int i = 0; i < listVanProvincies.Count; i++)
             {
-                
+
                 alleStraten += listVanProvincies[i].totaalStratenProvincie();
 
             }
-            Console.WriteLine("{0}\n\nAantal straten per provincie :\n\n", alleStraten);
-            for (int i = 0; i < listVanProvincies.Count; i++)
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport.txt"))
             {
-                String provincieNaam ="";
-                int aantalStratenPerProvincie = 0;
-                provincieNaam = listVanProvincies[i].naam;
-                aantalStratenPerProvincie += listVanProvincies[i].totaalStratenProvincie();
-                Console.WriteLine("° {0}:{1}", provincieNaam, aantalStratenPerProvincie);
+                sw.Write("Totaal: {0}\n\nAantal straten per provincie :\n\n", alleStraten);
+                for (int i = 0; i < listVanProvincies.Count; i++)
+                {
+                    String provincieNaam = "";
+                    int aantalStratenPerProvincie = 0;
+                    provincieNaam = listVanProvincies[i].naam;
+                    aantalStratenPerProvincie += listVanProvincies[i].totaalStratenProvincie();
+                    sw.Write("° procincienaam: {0}: aantalstraten: {1}", provincieNaam, aantalStratenPerProvincie);
+                }
+                for (int a = 0; a < listVanProvincies.Count; a++)
+                {
+                    Console.WriteLine("\nStraatInfo:  {0}:\n\n", listVanProvincies[a].naam);
+                    for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                    {
+                        sw.Write("    °  Gemeentenaam: {0} , totaalaantalstraten: {1} , totaallengtestraten: {2}\n", listVanProvincies[a].gemeentes[b].GemeenteNaam, listVanProvincies[a].gemeentes[b].straten.Count, listVanProvincies[a].gemeentes[b].totaalLengteStraten());
+                        sw.Write("      °  kortste straat: id: {0}, straatNaam: {1}, lengte: {2} \n", listVanProvincies[a].gemeentes[b].kortsteStraat().straatID, listVanProvincies[a].gemeentes[b].kortsteStraat().straatnaam, listVanProvincies[a].gemeentes[b].kortsteStraat().berekenStraatLengte());
+                        sw.Write("      °  langste straat: id: {0}, straatNaam: {1}, lengte: {2} \n", listVanProvincies[a].gemeentes[b].LangsteStraat().straatID, listVanProvincies[a].gemeentes[b].LangsteStraat().straatnaam, listVanProvincies[a].gemeentes[b].LangsteStraat().berekenStraatLengte());
+                    }
+                }
+
+
             }
+
         }
-            
-           
     }
 }
 

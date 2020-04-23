@@ -25,7 +25,10 @@ namespace Tool1
         }
         public double berekenStraatLengte()
         {
-            double lengte= 0;
+            double lengte = 0;
+            if (graaf == null) { return lengte; }
+
+            
             for (int i = 0; i < graaf.segmentenVanGraaf.Count; i++)
             {
                 lengte += this.graaf.segmentenVanGraaf[i].berekenlengte();

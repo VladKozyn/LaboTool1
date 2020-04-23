@@ -10,7 +10,6 @@ namespace Tool1
         public String GemeenteNaam { get; set; }
         public List<Straat> straten { get; set; }
         public List<int> StratenIds { get; set; }
-        public LeesCsvBestand idsLezen = new LeesCsvBestand();
 
 
         public Gemeente(int gemeenteId, String taalCode,String GemeenteNaam)
@@ -77,7 +76,36 @@ namespace Tool1
             }
             return lengte;
         }
+        public Straat kortsteStraat()
+        {
+            double lengte = this.straten[0].berekenStraatLengte();
+            Straat straattest = new Straat(this.straten[0].straatID,this.straten[0].straatnaam);
+            for (int i = 0; i < this.straten.Count; i++)
+            {
+                
+                if (lengte > this.straten[i].berekenStraatLengte())
+                {
+                    straattest = this.straten[i];
+                    lengte = this.straten[i].berekenStraatLengte();
+                }
+            }
+            return straattest;
+        }
+        public Straat LangsteStraat()
+        {
+            double lengte = this.straten[0].berekenStraatLengte();
+            Straat straattest = new Straat(this.straten[0].straatID, this.straten[0].straatnaam);
+            for (int i = 0; i < this.straten.Count; i++)
+            {
 
+                if (lengte < this.straten[i].berekenStraatLengte())
+                {
+                    straattest = this.straten[i];
+                    lengte = this.straten[i].berekenStraatLengte();
+                }
+            }
+            return straattest;
+        }
 
     }
 }

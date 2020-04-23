@@ -29,7 +29,7 @@ namespace Tool1
             int totaalStraten = 0;
             for (int i = 0; i < this.gemeentes.Count; i++)
             {
-                totaalStraten =+ this.gemeentes[i].totaalStratenGemeente();
+                totaalStraten += this.gemeentes[i].totaalStratenGemeente();
             }
             return totaalStraten;
         }
