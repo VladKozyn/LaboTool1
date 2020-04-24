@@ -7,7 +7,6 @@ namespace Tool1
     {
 
         public int graafID { get; set; }
-        public Dictionary<Knoop, List<Segment>> map { get; set; }
         public List<Segment> segmentenVanGraaf { get; set; }
 
 

@@ -41,7 +41,14 @@ namespace Tool1
             return ListGesorteerdData;
         }
 
-
+        /*wegsegmentID [0];
+          geo [1];
+          morfologie [2];
+          status [3];
+          beginWegknoopID [4];
+          eindWegknoopID [5];
+          linksStraatnaamID [6];
+          rechtsStraatnaamID [7]*/
 
 
         public List<Segment> maakListVanSegmenten(List<List<String>> wegSegmentenListText)
@@ -49,21 +56,21 @@ namespace Tool1
             List<Segment> listMetWegsegmenten = new List<Segment>();
             for (int i = 0; i < wegSegmentenListText.Count; i++)
             {
-                List<Double> doubleListVanPunten = new List<Double>();
-                List<Punt> listVanPuntenMetDoubleValue = new List<Punt>();
-                String puntenPlainText = wegSegmentenListText[i][1];
+                List<Double> doubleListVanPunten = new List<Double>(); //voor knoop
+                List<Punt> listVanPuntenMetDoubleValue = new List<Punt>(); //voor knoop
+                String puntenPlainText = wegSegmentenListText[i][1]; //v voor geopunten
                 puntenPlainText = puntenPlainText.Remove(0, 12);
-               // puntenPlainText = puntenPlainText.Replace(',','');
-                puntenPlainText = puntenPlainText.Trim('(',')');
+                puntenPlainText = puntenPlainText.Trim('(',')'); 
 
-                String[] puntenArrayStrings = puntenPlainText.Split(" ");
+                String[] puntenArrayStrings = puntenPlainText.Split(" ");//^
                 for (int k = 0; k < puntenArrayStrings.Length; k++)
                 {
-                  puntenArrayStrings[k] = puntenArrayStrings[k].TrimEnd(',');
+                  puntenArrayStrings[k] = puntenArrayStrings[k].TrimEnd(','); //list van punten adden
                     doubleListVanPunten.Add(Convert.ToDouble(puntenArrayStrings[k], CultureInfo.InvariantCulture));
                     if (!(k % 2 == 0))
                     {
-                        listVanPuntenMetDoubleValue.Add(new Punt(doubleListVanPunten[k - 1], doubleListVanPunten[k]));
+                        listVanPuntenMetDoubleValue.Add(new Punt(doubleListVanPunten[k - 1], doubleListVanPunten[k])); //punten aanmaken om toe te voegen in geo
+                        
                     }
                 }
 
