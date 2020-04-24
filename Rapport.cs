@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 
 namespace Tool1
 {
@@ -11,13 +9,13 @@ namespace Tool1
         static void Main(string[] args)
         {
             LeesCsvBestand leesCsv = new LeesCsvBestand();
-            List<Provincie> listVanProvincies = leesCsv.maakListVanProvincies(leesCsv.ProvincieInfoData(), leesCsv.listVanGebruikteProvincieIds());
-            List<Gemeente> listVanGemeentes = leesCsv.maakListVanGemeentes(leesCsv.GemeentenaamData());
-            List<Straat> listVanStraten = leesCsv.maakListVanStraten(leesCsv.StraatNamenData());
-            List<Straat> gebruikteListVanStraten = new List<Straat>();
-            List<Graaf> listVanGraven = new List<Graaf>();
-            List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten());
-            List<List<int>> checklist = leesCsv.GemeenteIdData();
+            List<Provincie> listVanProvincies = leesCsv.maakListVanProvincies(leesCsv.ProvincieInfoData(), leesCsv.listVanGebruikteProvincieIds()); //list van gebruikte prov
+            List<Gemeente> listVanGemeentes = leesCsv.maakListVanGemeentes(leesCsv.GemeentenaamData()); //list van gemeentes
+            List<Straat> listVanStraten = leesCsv.maakListVanStraten(leesCsv.StraatNamenData()); //list van alle straten
+            List<Straat> gebruikteListVanStraten = new List<Straat>(); //list om op te vullen welke straten ik gebruik
+            List<Graaf> listVanGraven = new List<Graaf>(); //list van graven om op te vullen met gebruikte graven
+            List<Segment> listVanSegmenten = leesCsv.maakListVanSegmenten(leesCsv.leesWegsegmenten()); //list van segmenten
+            List<List<int>> checklist = leesCsv.GemeenteIdData(); //check list om gemeenteIDData te verkorteren
             int alleStraten = 0;
 
             for (int a = 0; a < listVanGemeentes.Count; a++)
@@ -33,7 +31,7 @@ namespace Tool1
                     }
                 }
             }
-
+            //provincies hun gemeentes opvullen
             for (int i = 0; i < listVanProvincies.Count; i++)
             {
                 for (int b = 0; b < listVanProvincies[i].gemeentes.Count; b++)
@@ -42,7 +40,7 @@ namespace Tool1
                     listVanStraten = listVanProvincies[i].gemeentes[b].AlleStratenCheckenEnToevoegen(listVanStraten);
                 }
             }
-
+            // alle gemeentes hun straten opvullen + de totale lijst verkorteren
 
             for (int i = 0; i < listVanProvincies.Count; i++)
             {
@@ -56,7 +54,7 @@ namespace Tool1
 
                 }
             }
-
+            //gebruikte straten opvullen
 
             for (int i = 0; i < gebruikteListVanStraten.Count; i++)
             {
@@ -122,6 +120,9 @@ namespace Tool1
                 alleStraten += listVanProvincies[i].totaalStratenProvincie();
 
             }
+            //totale straten van alle provincies optellen
+
+
             using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport.txt"))
             {
                 sw.Write("Totaal: {0}\n\nAantal straten per provincie :\n\n", alleStraten);

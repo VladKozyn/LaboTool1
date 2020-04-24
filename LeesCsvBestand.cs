@@ -284,24 +284,19 @@ namespace Tool1
             return returnInts;
         }
 
-        public static bool IsNullOrEmpty(params String[] array)
-        {
-            return (array[0] == null);
-        }
-
 
         public List<Provincie> maakListVanProvincies(List<List<String>> provincieListText, List<int> listVanGebruikteProvincieIds)
         {
             List<Provincie> listMetProvincies = new List<Provincie>();
            ;
-            String[][] provincieArrayTextGebruikte =new String[listVanGebruikteProvincieIds.Count][];
+            String[][] provincieArrayTextGebruikte =new String[listVanGebruikteProvincieIds.Count][]; //gebruikte provincies
 
             for (int i = 0; i < provincieArrayTextGebruikte.Length; i++)
             {
                 provincieArrayTextGebruikte[i] =  new String[provincieListText[0].Count];
                 provincieArrayTextGebruikte[i][1] = listVanGebruikteProvincieIds[i].ToString();
             }
-
+            //gebruikte provincies provincie ID vullen
 
             for (int a = 0; a< provincieListText.Count; a++){
                 for (int b = 0; b < provincieArrayTextGebruikte.Length; b++)
@@ -314,10 +309,12 @@ namespace Tool1
                                 provincieArrayTextGebruikte[b][2] = provincieListText[a][2];
                             provincieArrayTextGebruikte[b][3] = provincieListText[a][3];
                         }
+                        //de arrays(is nog steeds een string) lijst van gemeente IDs opvullen 
                         else if (!(provincieArrayTextGebruikte[b][0].Contains(provincieListText[a][0])))
                         {
                             provincieArrayTextGebruikte[b][0] += provincieListText[a][0] + ",";
                         }
+                        //opvullen voor eerste keer
                         
                     }
                 }
@@ -326,9 +323,9 @@ namespace Tool1
             }
             for (int i = 0; i < provincieArrayTextGebruikte.Length; i++)
             {
-                String[] stringsVoorGemeenteID = provincieArrayTextGebruikte[i][0].Split(',');
+                String[] stringsVoorGemeenteID = provincieArrayTextGebruikte[i][0].Split(','); //de gemeenteid array splitsen
                 
-                List<int> gemeenteids = new List<int>();
+                List<int> gemeenteids = new List<int>(); //een nieuwe list op het te vullen met^
 
 
                 for (int b = 0; b < stringsVoorGemeenteID.Length; b++)
@@ -338,7 +335,7 @@ namespace Tool1
                         gemeenteids.Add(int.Parse(stringsVoorGemeenteID[b]));
                     }
                 }
-
+                // de int list van gemeenteids opvullen 
                 int provincieId = int.Parse(provincieArrayTextGebruikte[i][1]);
                 String taalCode = provincieArrayTextGebruikte[i][2];
                 String provincieNaam = provincieArrayTextGebruikte[i][3];
