@@ -18,7 +18,6 @@ namespace Tool1
 
             List<Straat> gebruikteListVanStraten = new List<Straat>(); //list om op te vullen van gebruikte straten
             List<Graaf> listVanGraven = new List<Graaf>(); //list van graven om op te vullen met gebruikte graven
-            List<Graaf> gebruikteListVanGraven = new List<Graaf>();
 
 
 
