@@ -41,9 +41,6 @@ namespace Tool1
             List<Segment> segmentenVanGraaf = new List<Segment>();
             this.segmentenVanGraaf = segmentenVanGraaf;
         }
-        public void showGraaf()
-        {
 
-        }
     }
 }

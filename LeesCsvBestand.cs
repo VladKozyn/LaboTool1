@@ -9,9 +9,9 @@ namespace Tool1
         public LeesCsvBestand()
         {
         }
+        //leest alle wegsegmenten en steeks ze in een list list
+        public List<List<String>> wegsegmentenData()
 
-
-        public List<List<String>> leesWegsegmenten()
         {
             List<List<String>> ListGesorteerdData = new List<List<string>>();
             using (StreamReader sr = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/WRdata.csv"))
@@ -39,18 +39,17 @@ namespace Tool1
                 }
             }
             return ListGesorteerdData;
+            /*wegsegmentID [0];
+  geo [1];
+  morfologie [2];
+  status [3];
+  beginWegknoopID [4];
+  eindWegknoopID [5];
+  linksStraatnaamID [6];
+  rechtsStraatnaamID [7]*/
         }
 
-        /*wegsegmentID [0];
-          geo [1];
-          morfologie [2];
-          status [3];
-          beginWegknoopID [4];
-          eindWegknoopID [5];
-          linksStraatnaamID [6];
-          rechtsStraatnaamID [7]*/
-
-
+        //vraagt de lijst van alle wegsegmenten en steekt ze in een lijst van segmenten
         public List<Segment> maakListVanSegmenten(List<List<String>> wegSegmentenListText)
         {
             List<Segment> listMetWegsegmenten = new List<Segment>();
@@ -83,17 +82,20 @@ namespace Tool1
                 listMetWegsegmenten.Add(new Segment(wegsegmentID, beginKnoop, eindKnoop, listVanPuntenMetDoubleValue, linksStraatnaamID, rechtsStraatnaamID));
             }
             return listMetWegsegmenten;
+            /*wegsegmentID [0];
+  geo [1];
+  morfologie [2];
+  status [3];
+  beginWegknoopID [4];
+  eindWegknoopID [5];
+  linksStraatnaamID [6];
+  rechtsStraatnaamID [7]*/
         }
-        /*wegsegmentID [0];
-          geo [1];
-          morfologie [2];
-          status [3];
-          beginWegknoopID [4];
-          eindWegknoopID [5];
-          linksStraatnaamID [6];
-          rechtsStraatnaamID [7]*/
 
-        public List<List<String>> StraatNamenData()
+
+        //leest alle straaten en steekt ze in een list list
+        public List<List<String>> straatNamenData()
+   
         {
             List<List<String>> ListGesorteerdStraten = new List<List<string>>();
             using (StreamReader sr = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/WRstraatnamen.csv"))
@@ -121,13 +123,11 @@ namespace Tool1
                 }
             }
             return ListGesorteerdStraten;
+            //[0] ID
+            //[1] Naam
         }
 
-
-        //[0] ID
-        //[1] Naam
-
-
+        //vraagt de lijst van alle straten en steekt ze in een lijst van Straten
         public List<Straat> maakListVanStraten(List<List<String>> wegStratenListText)
         {
             List<Straat> listMetStraten = new List<Straat>();
@@ -140,11 +140,12 @@ namespace Tool1
                 listMetStraten.Add(new Straat(straatId, naamStraat));
             }
             return listMetStraten;
+
+            //[0] ID
+            //[1] Naam
         }
 
-        //[0] ID
-        //[1] Naam
-
+        //leest alle gemeentes en steekt ze in een list list
         public List<List<String>> GemeentenaamData()
         {
             List<List<String>> ListGesorteerdGemeenteNamen = new List<List<string>>();
@@ -175,7 +176,7 @@ namespace Tool1
             return ListGesorteerdGemeenteNamen;
         }
 
-
+        //vraagt de lijst van alle gemeentes en steekt ze in een lijst van gemeentes
         public List<Gemeente> maakListVanGemeentes(List<List<String>> gemeentesListText)
         {
             List<Gemeente> listMetGemeentes = new List<Gemeente>();
@@ -189,13 +190,15 @@ namespace Tool1
                 listMetGemeentes.Add(new Gemeente(gemeenteid, taalCode, GemeenteNaam));
             }
             return listMetGemeentes;
+            /*
+ [0] gemeentenaamID
+ [1] gemeenteID
+ [2] taalCodeGemeenteNaam
+ [3] gemeenteNaam
+*/
         }
-        /*
-         [0] gemeentenaamID
-         [1] gemeenteID
-         [2] taalCodeGemeenteNaam
-         [3] gemeenteNaam
-        */
+
+        //leest gemeenteIddata in en steekt ze in een list list
         public List<List<int>> GemeenteIdData()
         {
             List<List<int>> ListGesorteerdGemeenteId = new List<List<int>>();
@@ -223,10 +226,11 @@ namespace Tool1
                 }
             }
             return ListGesorteerdGemeenteId;
+            // [0] straatNaamId
+            // [1] gemeenteID
         }
-        // [0] straatNaamId
-        // [1] gemeenteID
 
+        //leest provincie data in en steekt ze in een list list
         public List<List<String>> ProvincieInfoData()
         {
             List<List<String>> ListGesorteerdProvincieInfo = new List<List<string>>();
@@ -264,13 +268,15 @@ namespace Tool1
                 }
             }
             return ListGesorteerdProvincieInfo;
-        }
-        /*
- [0] gemeenteId
- [1] ProvincieID
- [2] taalCodeProcincieNaam
- [3] ProvincieNaam
+            /*
+[0] gemeenteId
+[1] ProvincieID
+[2] taalCodeProcincieNaam
+[3] ProvincieNaam
 */
+        }
+
+        //leest listvangebruikte ids in en steekt ze in een list
         public List<int> listVanGebruikteProvincieIds(){
             List<int> returnInts = new List<int>();
             StreamReader provincieIdLeesCheck = new StreamReader("C:/Users/lieke/OneDrive/scool/prog 3/Labo/1/repository/ProvincieIDsVlaanderen.csv");
@@ -282,9 +288,10 @@ namespace Tool1
 
             }
             return returnInts;
+
         }
 
-
+        //vraagt de list van gebruikteids en list van alle provincie en bewerkt ze naar ee list van alle GEBRUIKTE Provincies
         public List<Provincie> maakListVanProvincies(List<List<String>> provincieListText, List<int> listVanGebruikteProvincieIds)
         {
             List<Provincie> listMetProvincies = new List<Provincie>();
@@ -344,23 +351,14 @@ namespace Tool1
             }
 
 
-
-            
-
-
-
             return listMetProvincies;
-        }
-
-
-        /*
- [0] gemeenteId
- [1] ProvincieID
- [2] taalCodeProcincieNaam
- [3] ProvincieNaam
+            /*
+[0] gemeenteId
+[1] ProvincieID
+[2] taalCodeProcincieNaam
+[3] ProvincieNaam
 */
-
-
+        }
 
 
     }

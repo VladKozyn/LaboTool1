@@ -25,18 +25,19 @@ namespace Tool1
             this.straatnaam = straatnaam;
            
         }
-        public double berekenStraatLengte()
+        public void berekenStraatLengte()
         {
-            double lengte = 0;
-            if (graaf == null) { return lengte; }
+            straatlengte = 0;
+            if (graaf != null) {
 
-            
-            for (int i = 0; i < graaf.segmentenVanGraaf.Count; i++)
-            {
-                lengte += this.graaf.segmentenVanGraaf[i].berekenlengte();
+
+                for (int i = 0; i < graaf.segmentenVanGraaf.Count; i++)
+                {
+                    straatlengte += this.graaf.segmentenVanGraaf[i].berekenlengte();
+                }
+               
             }
-            this.straatlengte = lengte;
-            return lengte;
+             
         }
     }
 }
