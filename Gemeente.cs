@@ -32,9 +32,11 @@ namespace Tool1
                 if (checklist[i][1] == gemeenteId)
                 {
                     StratenIds.Add(checklist[i][0]);
+                    checklist.RemoveAt(i);
+                    i--;
                 }
             }
-            checklist.RemoveAll(i => i[1] == gemeenteId);
+        //    checklist.RemoveAll(i => i[1] == gemeenteId); //<-trager?
 
             return checklist;
         }
@@ -52,16 +54,17 @@ namespace Tool1
                 {
                     if(StratenIds[f] == listVanStraten[i].straatID)
                     {
-                        voegStraatToe(new Straat(listVanStraten[i].straatID,listVanStraten[i].straatnaam));
+                        voegStraatToe(new Straat(listVanStraten[i].straatID,listVanStraten[i].straatnaam)); 
                     }
                 }
             }
+            
             for (int b = 0; b < StratenIds.Count; b++)
             {
                 listVanStraten.RemoveAll(i => i.straatID == StratenIds[b]);
 
             }
-
+            
             return listVanStraten;
         }
         public int totaalStratenGemeente()
@@ -111,6 +114,10 @@ namespace Tool1
                 }
             }
             return straattest;
+        }
+        public void removeStraat(int index)
+        {
+            straten.RemoveAt(index);
         }
 
     }

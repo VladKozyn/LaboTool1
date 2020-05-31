@@ -18,6 +18,7 @@ namespace Tool1
 
             List<Straat> gebruikteListVanStraten = new List<Straat>(); //list om op te vullen van gebruikte straten
             List<Graaf> listVanGraven = new List<Graaf>(); //list van graven om op te vullen met gebruikte graven
+            List<Graaf> gebruikteListVanGraven = new List<Graaf>();
 
 
 
@@ -75,8 +76,7 @@ namespace Tool1
 
                     if (listVanSegmenten[i].linksStraatnaamID == listVanGraven[a].graafID)
                     {
-                       
-                            listVanGraven[a].voegSegmentToe(listVanSegmenten[i]);
+                        listVanGraven[a].voegSegmentToe(listVanSegmenten[i]);
                     }
                     /*
                     if (listVanSegmenten[i].linksStraatnaamID == listVanGraven[a].graafID)
@@ -111,13 +111,37 @@ namespace Tool1
                             {
                                 listVanProvincies[a].gemeentes[b].straten[c].graaf = listVanGraven[d];
                                 listVanProvincies[a].gemeentes[b].straten[c].berekenStraatLengte();
+
                             }
                         }
+
                     }
-                   
                 }
             }
 
+            //remove ongebruikte gemeentes
+            for (int a = 0; a < listVanProvincies.Count; a++)
+            {
+                for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                {
+                    if (listVanProvincies[a].gemeentes[b].totaalLengteStraten() == 0)
+                    {
+                        listVanProvincies[a].removeGemeente(b);
+                        b--;
+                    }
+                    else
+                    {
+                        for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
+                        {
+                            if (listVanProvincies[a].gemeentes[b].straten[c].straatlengte == 0)
+                            {
+                                listVanProvincies[a].gemeentes[b].removeStraat(c);
+                                c--;
+                            }
+                        }
+                    }
+                }
+            }
 
             //totale straten van alle provincies optellen
             for (int i = 0; i < listVanProvincies.Count; i++)
@@ -126,10 +150,10 @@ namespace Tool1
                 alleStraten += listVanProvincies[i].totaalStratenProvincie();
 
             }
-           
+
 
             //uitschrijven naar een txt bestand
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport.txt"))
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport2.txt"))
             {
                 sw.Write("Totaal: {0}\n\nAantal straten per provincie :\n", alleStraten);
 

@@ -23,21 +23,18 @@ namespace Tool1
         {
             this.straatID = straatID;
             this.straatnaam = straatnaam;
-           
+
         }
         public void berekenStraatLengte()
         {
             straatlengte = 0;
-            if (graaf != null) {
 
 
-                for (int i = 0; i < graaf.segmentenVanGraaf.Count; i++)
-                {
-                    straatlengte += this.graaf.segmentenVanGraaf[i].berekenlengte();
-                }
-               
+            for (int i = 0; i < graaf.segmentenVanGraaf.Count; i++)
+            {
+                straatlengte += this.graaf.segmentenVanGraaf[i].berekenlengte();
             }
-             
+
         }
     }
 }

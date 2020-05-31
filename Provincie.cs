@@ -33,6 +33,9 @@ namespace Tool1
             }
             return totaalStraten;
         }
-
+        public void removeGemeente(int index)
+        {
+            gemeentes.RemoveAt(index);
+        }
     }
 }
