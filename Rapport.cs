@@ -118,7 +118,7 @@ namespace Tool1
                 }
             }
 
-            //remove ongebruikte gemeentes
+            //remove ongebruikte gemeentes + maak dictionary
             for (int a = 0; a < listVanProvincies.Count; a++)
             {
                 for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
@@ -137,10 +137,15 @@ namespace Tool1
                                 listVanProvincies[a].gemeentes[b].removeStraat(c);
                                 c--;
                             }
+                            else
+                            {
+                                listVanProvincies[a].gemeentes[b].straten[c].graaf.maakDictionary();
+                            }
                         }
                     }
                 }
             }
+
 
             //totale straten van alle provincies optellen
             for (int i = 0; i < listVanProvincies.Count; i++)
@@ -152,7 +157,9 @@ namespace Tool1
 
 
             //uitschrijven naar een txt bestand
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport2.txt"))
+            //staat in commentaar? = true
+
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport3.txt"))
             {
                 sw.Write("Totaal: {0}\n\nAantal straten per provincie :\n", alleStraten);
 
@@ -188,6 +195,9 @@ namespace Tool1
 
 
             }
+
+
+
 
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace Tool1
 {
@@ -8,7 +9,7 @@ namespace Tool1
 
         public int graafID { get; set; }
         public List<Segment> segmentenVanGraaf { get; set; }
-
+        public Dictionary<Knoop, List<Segment>> dictionarySegmenten { get; set; }
 
 
         public void voegSegmentToe(Segment segment){
@@ -40,6 +41,36 @@ namespace Tool1
             this.graafID = graafID;
             List<Segment> segmentenVanGraaf = new List<Segment>();
             this.segmentenVanGraaf = segmentenVanGraaf;
+            Dictionary<Knoop, List<Segment>> dictionarySegmenten = new Dictionary<Knoop, List<Segment>>();
+            this.dictionarySegmenten = dictionarySegmenten;
+        }
+
+        public void maakDictionary()
+        {
+            for (int i = 0; i < segmentenVanGraaf.Count; i++)
+            {
+                if (dictionarySegmenten.ContainsKey(segmentenVanGraaf[i].beginknoop)){
+                    dictionarySegmenten[segmentenVanGraaf[i].beginknoop].Add(segmentenVanGraaf[i]);
+                }
+                else
+                {
+                    dictionarySegmenten.Add(segmentenVanGraaf[i].beginknoop, new List<Segment>());
+                    dictionarySegmenten[segmentenVanGraaf[i].beginknoop].Add(segmentenVanGraaf[i]);
+                }
+                if (dictionarySegmenten.ContainsKey(segmentenVanGraaf[i].eindknoop))
+                {
+                    dictionarySegmenten[segmentenVanGraaf[i].eindknoop].Add(segmentenVanGraaf[i]);
+                }
+                else
+                {
+                    dictionarySegmenten.Add(segmentenVanGraaf[i].eindknoop, new List<Segment>());
+                    dictionarySegmenten[segmentenVanGraaf[i].eindknoop].Add(segmentenVanGraaf[i]);
+                }
+
+            }
+
+
+         
         }
 
     }
