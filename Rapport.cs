@@ -239,8 +239,8 @@ namespace Tool1
                     {
                         for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
                         {
-                            sw.Write("{0};{1};{2};{3}\n",
-                         listVanProvincies[a].gemeentes[b].straten[c].straatID,
+                        sw.Write("{0};{1};{2};{3}\n",
+                        listVanProvincies[a].gemeentes[b].straten[c].straatID,
                         listVanProvincies[a].gemeentes[b].straten[c].straatnaam.Trim(),
                         listVanProvincies[a].gemeentes[b].straten[c].straatlengte,
                         listVanProvincies[a].gemeentes[b].straten[c].graaf.graafID);
@@ -263,9 +263,9 @@ namespace Tool1
 
                             foreach (var kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
                             {
-                                stringInts += (kvp.Key).ToString();
+                                stringInts += ((kvp.Key.knoopID).ToString()) + ";";
                             }
-                                    sw.Write("{0}({1})\n",
+                                    sw.Write("{0};({1})\n",
                             listVanProvincies[a].gemeentes[b].straten[c].graaf.graafID,
                             stringInts);
                         }
@@ -292,16 +292,22 @@ namespace Tool1
 
                                 foreach (var listSegmenten in kvp.Value)
                                 {
+                                    List<double> printGeopunten = new List<double>();
+                                    foreach(var geopunten in listSegmenten.geoPunten)
+                                    {
+                                        printGeopunten.Add(geopunten.x);
+                                        printGeopunten.Add(geopunten.y);
+                                    }
                                     sw.Write("[{0};{1};{2}({3})]",
                                     listSegmenten.segmentID,
-                                    listSegmenten.beginknoop,
-                                    listSegmenten.eindknoop,
-                                    string.Join(",", listSegmenten.geoPunten)
+                                    listSegmenten.beginknoop.knoopID,
+                                    listSegmenten.eindknoop.knoopID,
+                                    string.Join(";",printGeopunten)
                                     );
                                 }
                               
                             }
-                            sw.Write("\n");
+                           sw.Write("\n");
                         }
                     }
                 }
