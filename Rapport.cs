@@ -118,7 +118,7 @@ namespace Tool1
                 }
             }
 
-            //remove ongebruikte gemeentes + maak dictionary
+            //remove ongebruikte gemeentes/straten + maak dictionary
             for (int a = 0; a < listVanProvincies.Count; a++)
             {
                 for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
@@ -156,9 +156,10 @@ namespace Tool1
             }
 
 
-            //uitschrijven naar een txt bestand
+            //uitschrijven naar een txt bestand aka rapport
             //staat in commentaar? = true
-
+            #region
+            /*
             using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport3.txt"))
             {
                 sw.Write("Totaal: {0}\n\nAantal straten per provincie :\n", alleStraten);
@@ -196,9 +197,112 @@ namespace Tool1
 
             }
 
+            */
+            #endregion
 
+            //uitschrijven naar meerdere txt bestanden voor databank
+            //staat in commentaar? = false
 
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Provincies.txt"))
+            {
+                sw.Write("provincieID;provincieNaam;(gemeenteIds)\n");
+                for (int a = 0; a < listVanProvincies.Count; a++)
+                {
+                    sw.Write("{0};{1};({2})\n",
+                           listVanProvincies[a].provincieId,
+                           listVanProvincies[a].naam,
+                           string.Join(";", listVanProvincies[a].gemeenteIds));
+                }
+            }
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Gemeente.txt"))
+            {
+                sw.Write("gemeenteId;gemeenteNaam;totaalAantalStraten;(straatIds)\n");
+                for (int a = 0; a < listVanProvincies.Count; a++)
+                {
+                    for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                    {
+                        sw.Write("{0};{1};{2};({3})\n",
+                          listVanProvincies[a].gemeentes[b].gemeenteId,
+                         listVanProvincies[a].gemeentes[b].GemeenteNaam,
+                         listVanProvincies[a].gemeentes[b].totaalStratenGemeente(),
+                         string.Join(";", listVanProvincies[a].gemeentes[b].StratenIds));
+                    }
 
+                }
+            }
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Straat.txt"))
+            {
+                sw.Write("straatId;straatNaam;lengteStraat;graafId\n");
+                for (int a = 0; a < listVanProvincies.Count; a++)
+                {
+                    for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                    {
+                        for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
+                        {
+                            sw.Write("{0};{1};{2};{3}\n",
+                         listVanProvincies[a].gemeentes[b].straten[c].straatID,
+                        listVanProvincies[a].gemeentes[b].straten[c].straatnaam,
+                        listVanProvincies[a].gemeentes[b].straten[c].straatlengte,
+                        listVanProvincies[a].gemeentes[b].straten[c].graaf.graafID);
+                        }
+                    }
+                }
+            }
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Graaf.txt"))
+            {
+                sw.Write("GraafId;knoopIds\n");
+                for (int a = 0; a < listVanProvincies.Count; a++)
+                {
+                    for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                    {
+                        for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
+                        {
+
+                            string stringInts = "";
+                            for (int d = 0; d < listVanProvincies[a].gemeentes[b].straten[c].graaf.segmentenVanGraaf.Count; d++)
+                            {
+
+                                stringInts += ((listVanProvincies[a].gemeentes[b].straten[c].graaf.segmentenVanGraaf[d].segmentID).ToString() + ";");
+                            }
+                            sw.Write("{0}({1})\n",
+                            listVanProvincies[a].gemeentes[b].straten[c].graaf.graafID,
+                            stringInts);
+                        }
+                    }
+                }
+            }
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Knopen&Segmenten&Punten.txt"))
+            {
+                sw.Write("KnoopId;puntX;puntY;[segmentIds;beginKnoop;eindKnoop(geoPuntenSegment)]\n");
+                for (int a = 0; a < listVanProvincies.Count; a++)
+                {
+                    for (int b = 0; b < listVanProvincies[a].gemeentes.Count; b++)
+                    {
+                        for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
+                        {
+
+                            foreach (var kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
+                            {
+                                sw.Write("{0};{1};{2}",
+                                    kvp.Key.knoopID,
+                                     kvp.Key.punt.x,
+                                     kvp.Key.punt.y
+                                     );
+
+                                foreach (var listSegmenten in kvp.Value)
+                                {
+                                    sw.Write("[{0};{1};{2}({3})]",
+                                    listSegmenten.segmentID,
+                                    listSegmenten.beginknoop,
+                                    listSegmenten.eindknoop,
+                                    string.Join(",", listSegmenten.geoPunten)
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
