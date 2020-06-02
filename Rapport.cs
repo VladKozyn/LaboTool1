@@ -241,7 +241,7 @@ namespace Tool1
                         {
                             sw.Write("{0};{1};{2};{3}\n",
                          listVanProvincies[a].gemeentes[b].straten[c].straatID,
-                        listVanProvincies[a].gemeentes[b].straten[c].straatnaam,
+                        listVanProvincies[a].gemeentes[b].straten[c].straatnaam.Trim(),
                         listVanProvincies[a].gemeentes[b].straten[c].straatlengte,
                         listVanProvincies[a].gemeentes[b].straten[c].graaf.graafID);
                         }
@@ -259,12 +259,13 @@ namespace Tool1
                         {
 
                             string stringInts = "";
-                            for (int d = 0; d < listVanProvincies[a].gemeentes[b].straten[c].graaf.segmentenVanGraaf.Count; d++)
-                            {
 
-                                stringInts += ((listVanProvincies[a].gemeentes[b].straten[c].graaf.segmentenVanGraaf[d].segmentID).ToString() + ";");
+
+                            foreach (var kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
+                            {
+                                stringInts += (kvp.Key).ToString();
                             }
-                            sw.Write("{0}({1})\n",
+                                    sw.Write("{0}({1})\n",
                             listVanProvincies[a].gemeentes[b].straten[c].graaf.graafID,
                             stringInts);
                         }
@@ -298,7 +299,9 @@ namespace Tool1
                                     string.Join(",", listSegmenten.geoPunten)
                                     );
                                 }
+                              
                             }
+                            sw.Write("\n");
                         }
                     }
                 }
