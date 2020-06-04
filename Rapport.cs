@@ -214,7 +214,7 @@ namespace Tool1
 
                 }
             }
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Gemeente.txt"))
+           using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Gemeente.txt"))
             {
                 sw.Write("gemeenteId;gemeenteNaam;totaalAantalStraten;provincieId\n");
                 for (int a = 0; a < listVanProvincies.Count; a++)
@@ -281,7 +281,7 @@ namespace Tool1
                         for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
                         {
 
-                            foreach (var kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
+                            foreach (KeyValuePair<Knoop,List<Segment>> kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
                             {
                                 sw.Write("{0};{1};{2};{3}\n",
                                     kvp.Key.knoopID,
@@ -296,7 +296,6 @@ namespace Tool1
                     }
                 }
             }
-
             using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Segmenten.txt"))
             {
                 sw.Write("segmentId;beginKnoop;eindKnoop;knoopId\n");
@@ -307,7 +306,7 @@ namespace Tool1
                         for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
                         {
 
-                            foreach (var kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
+                            foreach (KeyValuePair<Knoop, List<Segment>> kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
                             {
                                 foreach (var listSegmenten in kvp.Value)
                                 {
@@ -341,7 +340,7 @@ namespace Tool1
                         for (int c = 0; c < listVanProvincies[a].gemeentes[b].straten.Count; c++)
                         {
 
-                            foreach (var kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
+                            foreach (KeyValuePair<Knoop, List<Segment>> kvp in listVanProvincies[a].gemeentes[b].straten[c].graaf.dictionarySegmenten)
                             {
                                 foreach (var listSegmenten in kvp.Value)
                                 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tool1
 {
@@ -13,6 +14,18 @@ namespace Tool1
             this.knoopID = knoopID;
             this.punt = punt;
 
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Knoop knoop &&
+                   knoopID == knoop.knoopID &&
+                   EqualityComparer<Punt>.Default.Equals(punt, knoop.punt);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(knoopID, punt);
         }
     }
 }

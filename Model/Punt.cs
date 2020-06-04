@@ -16,5 +16,17 @@ namespace Tool1
             this.x = x;
             this.y = y;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Punt punt &&
+                   x == punt.x &&
+                   y == punt.y;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(x, y);
+        }
     }
 }

@@ -31,5 +31,22 @@ namespace Tool1
             }
             return berekening;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Segment segment &&
+                   EqualityComparer<Knoop>.Default.Equals(beginknoop, segment.beginknoop) &&
+                   EqualityComparer<Knoop>.Default.Equals(eindknoop, segment.eindknoop) &&
+                   segmentID == segment.segmentID &&
+                   EqualityComparer<List<Punt>>.Default.Equals(geoPunten, segment.geoPunten) &&
+                   linksStraatnaamID == segment.linksStraatnaamID &&
+                   rechtsStraatnaamID == segment.rechtsStraatnaamID;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(beginknoop, eindknoop, segmentID, geoPunten, linksStraatnaamID, rechtsStraatnaamID);
+        }
+
     }
 }
