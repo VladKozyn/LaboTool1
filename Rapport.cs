@@ -159,8 +159,8 @@ namespace Tool1
             //uitschrijven naar een txt bestand aka rapport
             //staat in commentaar? = true
             #region
-            /*
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport3.txt"))
+            
+         /*   using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\rapport4.txt"))
             {
                 sw.Write("Totaal: {0}\n\nAantal straten per provincie :\n", alleStraten);
 
@@ -196,14 +196,14 @@ namespace Tool1
 
 
             }
-
             */
+            
             #endregion
 
             //uitschrijven naar meerdere txt bestanden voor databank
             //staat in commentaar? = false
             #region
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Provincies.txt"))
+        /*    using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Provincies.txt"))
             {
                 sw.Write("provincieID;provincieNaam\n");
                 for (int a = 0; a < listVanProvincies.Count; a++)
@@ -270,7 +270,7 @@ namespace Tool1
                         }
                     }
                 }
-            }
+            }*/
             using (StreamWriter sw = new StreamWriter(@"C:\Users\lieke\OneDrive\scool\prog 3\Labo\1\repository\MyFiles\Knopen.txt"))
             {
                 sw.Write("knoopId;puntX;puntY;graafId\n");

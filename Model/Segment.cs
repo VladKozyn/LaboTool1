@@ -24,12 +24,14 @@ namespace Tool1
         public double berekenlengte()
         {
             double berekening = 0.0;
-
+            double output = 0;
             for (int i = 1; i <this.geoPunten.Count; i++)
             {
                 berekening += Math.Sqrt(Math.Pow(this.geoPunten[i].x - this.geoPunten[i - 1].x, 2) + Math.Pow(this.geoPunten[i].y - this.geoPunten[i - 1].y, 2));
+               
+                //output = Convert.ToDouble(berekening.ToString("N3"));
             }
-            return berekening;
+            return output;
         }
 
         public override bool Equals(object obj)
